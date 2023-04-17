@@ -6,6 +6,7 @@
   height: 100vh;
   position: relative;
 }
+
 .heading {
   position: absolute;
   top: 0;
@@ -17,6 +18,7 @@
   font-size: 40px;
   color: #D49223;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -39,6 +41,7 @@
   background-color: rgba(40, 49, 54, 0.8);
   font-family: 'Inria Sans', sans-serif;
 }
+
 .container input {
   width: 80%;
   max-width: 400px;
@@ -48,4 +51,22 @@
   border: none;
   font-size: 18px;
   color: #1E1E1E;
+}
+
+.container button {
+  width: 10rem;
+  height: 3rem;
+  left: 425px;
+  top: 467.5px;
+
+  background: #D49223;
+  border-radius: 30px;
+  font-family: 'Inria Sans';
+  font-size: 1.5rem;
+  color: #1E1E1E;
+}
+
+.container button:hover {
+  background-color: #ECB251;
+  transition: 0.7s;
 }

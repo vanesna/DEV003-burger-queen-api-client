@@ -12,7 +12,7 @@ function Background() {
       <div className='container'>
       <input type="text" placeholder="email" />
       <input type="text" placeholder="password" />
-      <button className='loginButton'>Login</button>
+      <button >Login</button>
       </div>
     </div>
   );
