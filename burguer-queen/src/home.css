@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
 
-.background-image {
+body {
+  margin: 0;
+}
+
+  .background-image {
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -53,12 +57,11 @@
   color: #1E1E1E;
 }
 
-.container button {
+.container .login-button {
   width: 10rem;
   height: 3rem;
   left: 425px;
   top: 467.5px;
-
   background: #D49223;
   border-radius: 30px;
   font-family: 'Inria Sans';
@@ -66,7 +69,7 @@
   color: #1E1E1E;
 }
 
-.container button:hover {
+.container .login-button:hover {
   background-color: #ECB251;
   transition: 0.7s;
 }
