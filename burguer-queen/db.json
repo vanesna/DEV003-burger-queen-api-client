@@ -1,0 +1,20 @@
+{
+    "waiters": [
+        {
+            "id": 1,
+            "name": "Diego",
+            "lastname": "Gonzalez",
+            "email": "diego_gon@gmail.com",
+            "password": "EHznmj22"
+            
+        },
+        {
+            "id": 2,
+            "name": "Laura",
+            "lastname": "Ruiz",
+            "email": "lau_ruiz@gmail.com",
+            "password": "kjyREs25"
+            
+        }
+    ]
+}
