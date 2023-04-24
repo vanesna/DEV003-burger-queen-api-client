@@ -1,5 +1,5 @@
-import logo from '../assets/home.jpg';
-import '../home.css';
+import logo from '../../assets/home.jpg';
+import './login.css';
 import { useForm } from 'react-hook-form';
 
 export default function Home() {

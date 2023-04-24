@@ -1,5 +1,5 @@
-import logo from '../assets/home.jpg';
-import '../home.css';
+import logo from '../../assets/home.jpg';
+import '../login/login.css';
 import { Button } from 'react-bootstrap';
 
 export default function Breakfast() {
