@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from './components/home';
-import Menu from './components/menu'
+import Login from './components/login/login';
+import Menu from './components/menu/menu'
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <Login />,
     errorElement: <h1>Error</h1>,
   },
   {
