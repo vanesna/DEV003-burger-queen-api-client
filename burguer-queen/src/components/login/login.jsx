@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import './login.css';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
-  let urlUsers = 'http://localhost:8080/users'
+  const onNavigate = useNavigate(); 
 
   // useEffect(() => {
   //   api.get(urlUsers).then((res) =>
@@ -36,14 +36,18 @@ export default function Home() {
     axios.post('http://localhost:8080/login', data)
       .then(function (response) {
         console.log('token', response.data.accessToken);
-        console.log('user', response.data.user.email);
+        console.log('user', response.data.user);
         const token = response.data.accessToken;
         const currentUser = response.data.user;
         localStorage.setItem('accessToken', token)
-        localStorage.setItem('currentUser', JSON.stringify(response.data.user.email))
+        localStorage.setItem('currentUser', JSON.stringify(response.data.user))
+        if(currentUser.role === 'waiter'){
+          alert('welcome');
+          onNavigate('/menu');
+        }
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error);   
       });
 
   }
