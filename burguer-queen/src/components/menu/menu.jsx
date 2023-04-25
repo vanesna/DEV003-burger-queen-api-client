@@ -1,16 +1,13 @@
-import logo from '../../assets/home.jpg';
 import '../login/login.css';
-import { Button } from 'react-bootstrap';
+import  Header  from '../Header/header';
 
 export default function Breakfast() {
-    const backgroundImageStyle = {
-        backgroundImage: `url(${logo})`
-      };
+    
 
     return ( 
-    <div className="background-image" style={backgroundImageStyle}>
-      <Button variant="primary">Click me</Button>
-
+    <div >
+      <Header />
+      
     </div>
     )
 };

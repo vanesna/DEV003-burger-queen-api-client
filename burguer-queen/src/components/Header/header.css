@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+
+.backgroundHeader {
+    background-size: cover;
+    background-position: center;
+    height: 20vh;
+    position: relative;
+    opacity: 0.9;
+}
+
+.textHeader {
+    position: absolute;
+    left: 5%;
+    padding: 20px 0;
+    font-size: 50px;
+    color: #D49223;
+}
