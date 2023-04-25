@@ -3,28 +3,14 @@ import React, { useState, useEffect } from 'react';
 import './login.css';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onNavigate = useNavigate(); 
 
-  // useEffect(() => {
-  //   api.get(urlUsers).then((res) =>
-  //     console.log(res))
-  // });
-
-  // axios({
-  //   method: 'get',
-  //   url: 'http://localhost:8080/users',
-  //   headers: {'X-Custom-Header': 'foobar'}
-  // })
-  //   .then(function (response) {
-  //     console.log('response axios', response.data.accessToken);
-  //   });
+  
 
   const backgroundImageStyle = {
     backgroundImage: `url(${logo})`
@@ -38,13 +24,9 @@ export default function Home() {
         console.log('token', response.data.accessToken);
         console.log('user', response.data.user);
         const token = response.data.accessToken;
-        const currentUser = response.data.user;
+        //const currentUser = response.data.user;
         localStorage.setItem('accessToken', token)
         localStorage.setItem('currentUser', JSON.stringify(response.data.user))
-        if(currentUser.role === 'waiter'){
-          alert('welcome');
-          onNavigate('/menu');
-        }
       })
       .catch(function (error) {
         console.log(error);   
