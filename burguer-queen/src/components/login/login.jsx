@@ -1,60 +1,63 @@
-import logo from '../../assets/home.jpg';
-import React, { useState, useEffect } from 'react';
-import './login.css';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
+import './login.css';
+import logo from '../../assets/home.jpg';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(6).max(15).required(),
+});
 
 export default function Home() {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-
-  
-
   const backgroundImageStyle = {
-    backgroundImage: `url(${logo})`
+    backgroundImage: `url(${logo})`,
   };
-  const { register, formState: { errors }, handleSubmit } = useForm({ mode: "onChange" });
+  const [serverError, setServerError] = useState('');
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({ mode: 'onChange', resolver: yupResolver(schema) });
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
-    axios.post('http://localhost:8080/login', data)
-      .then(function (response) {
-        console.log('token', response.data.accessToken);
-        console.log('user', response.data.user);
-        const token = response.data.accessToken;
-        //const currentUser = response.data.user;
-        localStorage.setItem('accessToken', token)
-        localStorage.setItem('currentUser', JSON.stringify(response.data.user))
+    const httpConfig = { headers: { 'Content-Type': 'application/json' } };
+    axios
+      .post('http://localhost:8080/login', data, httpConfig)
+      .then((response) => {
+        const { accessToken, user } = response.data;
+        console.log('respose axios', response.data);
+        localStorage.setItem('sessionUser', JSON.stringify(user));
+        localStorage.setItem('sessionToken', accessToken);
+        console.log('Welcome!');
+        navigate('/menu');
       })
-      .catch(function (error) {
-        console.log(error);   
+      .catch((error) => {
+        console.error(error.response);
+        setServerError(error.response.data);
       });
-
-  }
+  };
 
   return (
     <div className="background-image" style={backgroundImageStyle}>
       <h3 className="heading">Burger Queen</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='container'>
-          <input type="text" placeholder="email" onChange={(e) => setEmail(e.target.value)} {...register('email', {
-            pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-            required: true,
-          })} />
-          {errors.email?.type === 'pattern' && <p className="text-danger">Invalid Email Adress</p>}
-          {errors.email?.type === 'required' && <p className="text-danger">Required</p>}
-
-          <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} {...register('password', {
-            pattern: /^[0-9]+$/i,
-            required: true,
-            minLength: 6,
-            maxLength: 20,
-          })} />
-          {errors.password?.type === 'pattern' && <p className="text-danger">Invalid Password</p>}
-          {errors.password?.type === 'required' && <p className="text-danger">Required</p>}
-          <input type='submit' value='Login' className='login-button' />
+        <div className="container">
+          <input type="text" placeholder="email" {...register('email')} />
+          <p>{errors.email?.message}</p>
+          <input
+            type="password"
+            placeholder="password"
+            {...register('password')}
+          />
+          <p>{errors.password?.message}</p>
+          <p>{serverError}</p>
+          <input type="submit" value="Login" className="login-button" />
         </div>
       </form>
     </div>
