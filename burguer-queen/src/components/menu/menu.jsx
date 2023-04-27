@@ -1,28 +1,17 @@
-import '../login/login.css';
 import  Header  from '../Header/header';
-import axios from 'axios';
+import CardsProd from '../cardsProd/cardsProd';
+import './menu.css';
 
 export default function Breakfast() {
     
 
-  const token = localStorage.getItem('accessToken');
-  //console.log('token: ', token);
-
-  axios.get('http://localhost:8080/products', {
-    headers: {
-      'Authorization': `Bearer ${token}` 
-    }
-  })
-  .then((res) => {
-    console.log(res.data)
-  })
-  .catch((error) => {
-    console.error(error)
-  })
-
     return ( 
-    <div >
+    <div>
       <Header />
+      <div className='containerMenu' >
+      <CardsProd />
+      </div>
+      
       
       
     </div>

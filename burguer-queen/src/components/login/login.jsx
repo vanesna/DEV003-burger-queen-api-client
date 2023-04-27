@@ -31,7 +31,7 @@ export default function Home() {
       .post('http://localhost:8080/login', data, httpConfig)
       .then((response) => {
         const { accessToken, user } = response.data;
-        console.log('respose axios', response.data);
+        //console.log('respose axios', response.data);
         localStorage.setItem('sessionUser', JSON.stringify(user));
         localStorage.setItem('sessionToken', accessToken);
         console.log('Welcome!');
