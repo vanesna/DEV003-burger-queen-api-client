@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './cardsProd.css'
 
 export default function CardsProd() {
 
@@ -31,16 +32,26 @@ export default function CardsProd() {
 
     return (
         <>
-            {products.map((product) => {
-                return (
-                    <div key={product.id}>
-                        <img src={product.image} alt=''/>
-                        <p>{product.name}</p>
-                        <p>{product.price}</p>
-                    </div>
-                )
-            }
-            )}
+            <div className='containerMenu'>
+                {products.map((product) => {
+                    return (
+
+                        <div className='card' key={product.id}>
+                            <img src={product.image} alt='' />
+                            <h3 >{product.name}</h3>
+                            <h3 className='cardPrice'>${product.price}</h3>
+                            <div className='quantity'>
+                                <button className='cardBtnMore'>+</button>
+                                <input className='cardInput' type='number' value={0} />
+                                <button className='cardBtnLess'>-</button>
+                            </div>
+
+                        </div>
+
+                    )
+                }
+                )}
+            </div >
         </>
     )
 };

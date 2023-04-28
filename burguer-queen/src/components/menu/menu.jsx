@@ -8,9 +8,7 @@ export default function Breakfast() {
     return ( 
     <div>
       <Header />
-      <div className='containerMenu' >
       <CardsProd />
-      </div>
       
       
       
