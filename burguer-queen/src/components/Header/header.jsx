@@ -16,7 +16,9 @@ function Header() {
   return (
     <header className="backgroundHeader" style={backgroundImageStyle}>
       <p className="textHeader">Burger Queen</p>
-      <button onClick={logout}>Logout</button>
+      <button className="logout-btn" onClick={logout}>
+        <i className="bi bi-box-arrow-left"></i>
+      </button>
     </header>
   );
 }
