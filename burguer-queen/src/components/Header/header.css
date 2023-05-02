@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inria Sans', sans-serif;
+}
+
+.backgroundHeader {
+  background-size: cover;
+  background-position: center;
+  height: 20vh;
+  position: relative;
+  opacity: 0.9;
+}
+
+.textHeader {
+  position: absolute;
+  left: 5%;
+  padding: 20px 0;
+  font-size: 30px;
+  font-weight: bold;
+  color: #D49223;
+}
+
+.logout-btn {
+  background-color: #6D731F;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.logout-btn:hover {
+  background-color: #4F5320;
+}
+
+@media only screen and (min-width: 768px) {
+  .textHeader {
+    font-size: 32px;
+  }
+
+  .logout-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .backgroundHeader {
+    height: 30vh;
+  }
+
+  .textHeader {
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  .logout-btn {
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 18px;
+    margin-left: 20px;
+  }
+}

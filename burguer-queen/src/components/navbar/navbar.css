@@ -1,0 +1,132 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+    
+.client-name {
+  margin-bottom: 10px;
+}
+    
+.client-name input {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+}
+  
+.button-group {
+  display: flex;
+  flex: 1;
+  /* margin: 0 auto; */
+  /* justify-content: space-evenly; */
+  margin: 10px auto;
+  flex-wrap: wrap;
+  width: 90%;
+}
+    
+.button-group button {
+  flex: 1;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: #D49223;
+  text-align: center;
+  font-size: 14px;  
+}
+    
+.button-group button:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+    
+.button-group button:nth-child(2) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+    
+.button-group button:not(:last-child) {
+  margin-right: -1px;
+  /* border: 1px solid red; */
+}
+  
+.button-group button.cart {
+  flex: 0;
+  padding: 10px 20px;
+  background-color: #6D731F;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+  
+.button-group button.cart:hover {
+  background-color: #4F5320;
+}
+  
+@media only screen and (min-width: 768px) {
+    .client-name {
+      margin-right: 20px;
+      margin-bottom: 0;
+    }
+    .button-group button {
+        /* width: 290px; */
+        padding: 8px;
+        font-size: 18px;
+      }
+      .button-group button:hover {
+        background-color: #8B5E13;
+      }
+    
+      .button-group button.cart {
+        width: auto;
+        padding: 12px 24px;
+        font-size: 16px;
+        margin-left: 20px;
+        margin-top: 0;
+      }
+      .button-group button.cart:hover {
+        background-color: #4F5320;
+      }
+}
+
+@media only screen and (min-width: 1024px) {
+    .navbar {
+      max-width: 1024px;
+      margin: 15px auto;
+      flex-direction: row;
+      gap: 30px;
+    }
+    
+    .client-name {
+      /* margin-right: 10px; */
+      margin-bottom: 0;
+    }
+  
+    .client-name input {
+      padding: 15px;
+      font-size: 16px;
+    }
+    
+    .button-group button {
+        /* width: 120px; */
+        padding: 15px;
+        font-size: 16px;
+        cursor: pointer;
+        /* width: 80%; */
+      }
+      .button-group button:hover {
+        background-color: #8B5E13;
+      }
+    .button-group button.cart {
+        width: auto;
+        padding: 16px 32px;
+      } 
+      .button-group button.cart:hover {
+        background-color: #4F5320;
+      }
+}
