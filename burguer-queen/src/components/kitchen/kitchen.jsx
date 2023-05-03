@@ -5,6 +5,8 @@ import './kitchen.css'
 
 export default function Kitchen() {
 
+    const tab = <>&nbsp;&nbsp;&nbsp;&nbsp;</>;
+
     const [orders, setOrders] = useState([]);
     // const [products, setProducts] = useState([]);
 
@@ -39,21 +41,23 @@ export default function Kitchen() {
             <Header />
             <h1>Orders</h1>
             <div className='containerOrders'>
-                {orders.map((order) => {                
-                    return (
-                        <div className='cardOrder' key={order.id}>
-                            <h2>{order.client}</h2>
-                            {order.products.map((products) => {
-                                return (
-                                    <div key={products.id}>
-                                        <h3>{products.qty} {products.product.name}</h3>                                        
-                                    </div>
-                                )
-                            })}                        
-                            <h4>Entry: {order.dataEntry}</h4>
-                            <button>Deliver</button>
-                        </div>
-                    )
+                {orders.map((order) => {
+                    if (order.status === 'pending') {
+                        return (
+                            <div className='cardOrder' key={order.id}>
+                                <h3>{order.client}</h3>
+                                {order.products.map((products) => {
+                                    return (
+                                        <div key={products.id}>
+                                            <h4 className='productsOrder'>{products.qty}{tab}{products.product.name}</h4>
+                                        </div>
+                                    )
+                                })}
+                                <p>Entry: {order.dataEntry}</p>
+                                <button>Deliver</button>
+                            </div>
+                        )
+                    }
                 }
                 )}
             </div >

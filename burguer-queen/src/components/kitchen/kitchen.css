@@ -14,37 +14,50 @@
 .cardOrder {
     background-color: #D49223;
     width: 13rem;
-    height: 19rem;
+    /* height: 19rem; */
     border-radius: 1rem;
+    padding: 5%;
 }
 
 h1 {
     color: #FFFFFF;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     text-align: center;
+}
+
+.cardOrder h3 {
+    margin-top: 0.5rem;
+    text-align: center;
+    background-color: #ECB251;
 }
 
 h4 {
     text-align: center;
 }
 
-.cardOrder h2 {
-    margin-top: 1rem;
+p {
     text-align: center;
-    background-color: #ECB251;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.productsOrder {
+    color: black;
 }
 
 .cardOrder button {
+    
     width: 8rem;
     height: 2.3rem;
     border-radius: 0.8rem;
-    margin-top: 70%;
     margin-left: 19%;
     background-color: #711E62;
-    ;
+    border: none;
 
     font-size: 1.3rem;
     line-height: 35px;
     text-align: center;
     color: #FFFFFF;
 }
+
+
