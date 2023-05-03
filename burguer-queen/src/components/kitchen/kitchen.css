@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
+
+.containerOrders {
+    height: 100%;
+    padding: 2rem;
+    color: #FFFF;
+    font-family: 'Inria Sans', sans-serif;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
+    justify-content: center;
+}
+
+.cardOrder {
+    background-color: #D49223;
+    width: 13rem;
+    height: 19rem;
+    border-radius: 1rem;
+}
+
+h1 {
+    color: #FFFFFF;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+.cardOrder h2 {
+    margin-top: 1rem;
+    text-align: center;
+    background-color: #ECB251;
+}
+
+.cardOrder button {
+    width: 8rem;
+    height: 2.3rem;
+    border-radius: 0.8rem;
+    margin-top: 70%;
+    margin-left: 19%;
+    background-color: #711E62;
+    ;
+
+    font-size: 1.3rem;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Login from './components/login/login';
 import Menu from './components/menu/menu';
+import Kitchen from './components/kitchen/kitchen';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 function PrivateRoute({ element: Component, ...rest }) {
@@ -20,6 +21,7 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="/menu" element={<PrivateRoute element={Menu} />} />
         <Route path="/" element={<Navigate to="/menu" />} />
+        <Route path="/kitchen" element={<PrivateRoute element={Kitchen} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
