@@ -21,7 +21,7 @@
 
 h1 {
     color: #FFFFFF;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     text-align: center;
 }
 
@@ -46,7 +46,7 @@ p {
 }
 
 .cardOrder button {
-    
+
     width: 8rem;
     height: 2.3rem;
     border-radius: 0.8rem;
@@ -60,4 +60,4 @@ p {
     color: #FFFFFF;
 }
 
-
+/* ------- NavBar ------- */
