@@ -35,12 +35,17 @@ export default function Kitchen() {
             })
     }
 
+    const toDeliver = () => {
+        console.log(new Date());
+        alert('Order Ready: '+ new Date());
+    } 
+
 
     return (
         <div>
             <Header />
             <h1>Orders</h1>
-            <div className='containerOrders'>
+            <main className='containerOrders'>
                 {orders.map((order) => {
                     if (order.status === 'pending') {
                         return (
@@ -54,13 +59,13 @@ export default function Kitchen() {
                                     )
                                 })}
                                 <p>Entry: {order.dataEntry}</p>
-                                <button>Deliver</button>
+                                <button onClick={() => toDeliver()}>Deliver</button>
                             </div>
                         )
                     }
                 }
                 )}
-            </div >
+            </main >
         </div>
     );
 }
