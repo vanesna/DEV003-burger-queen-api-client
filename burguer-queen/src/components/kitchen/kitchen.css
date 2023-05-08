@@ -2,7 +2,7 @@
 
 .containerOrders {
     height: 100%;
-    padding: 2rem;
+    padding: 2% 12%;;
     color: #FFFF;
     font-family: 'Inria Sans', sans-serif;
     display: grid;
@@ -61,3 +61,82 @@ p {
 }
 
 /* ------- NavBar ------- */
+
+.navbar-kitchen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 1rem; */
+    max-width: 50%;
+    margin: 15px auto;
+}
+
+.button-group-kitchen {
+    display: flex;
+    flex: 1;
+    margin: 10px auto;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.button-group-kitchen button {
+    flex: 1;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background-color: #d49223;
+    text-align: center;
+    font-size: 14px;
+}
+
+.button-group-kitchen button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.button-group-kitchen button:nth-child(2) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.button-group-kitchen button:not(:last-child) {
+    margin-right: -1px;
+    /* border: 1px solid red; */
+}
+
+@media only screen and (min-width: 768px) {
+
+
+    .button-group-kitchen button {
+        /* width: 290px; */
+        padding: 8px;
+        font-size: 18px;
+    }
+
+    .button-group-kitchen button:hover {
+        background-color: #8b5e13;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .navbar-kitchen {
+        /* max-width: 1024px; */
+        margin: 15px auto;
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .button-group-kitchen button {
+        /* width: 120px; */
+        padding: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        /* width: 80%; */
+    }
+
+    .button-group-kitchen button:hover {
+        background-color: #8b5e13;
+    }
+}

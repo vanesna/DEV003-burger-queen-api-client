@@ -7,10 +7,10 @@ export default function NavBarKitchen({handleOrderStatus}) {
 
 
     return (
-        <nav className="navbar">
-            <div className="button-group">
-                <button className="button-orders" value='pending' onClick={(e) => handleOrderStatus(e)}>In process</button>
-                <button className="button-orders" value='delivered' onClick={(e) => handleOrderStatus(e)}>Ready</button>
+        <nav className="navbar-kitchen">
+            <div className="button-group-kitchen">
+                <button className="button-orders-kitchen" value='pending' onClick={(e) => handleOrderStatus(e)}>In process</button>
+                <button className="button-orders-kitchen" value='delivered' onClick={(e) => handleOrderStatus(e)}>Ready</button>
             </div>
         </nav>
     );
