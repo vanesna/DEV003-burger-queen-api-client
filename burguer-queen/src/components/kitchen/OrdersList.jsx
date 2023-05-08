@@ -1,50 +1,43 @@
-import React, { useEffect, useState } from 'react';
+//import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './kitchen.css'
 
-export default function OrderList() {
+export default function OrdersList({ ordersFil }) {
 
     const tab = <>&nbsp;&nbsp;&nbsp;&nbsp;</>;
 
-    const [orders, setOrders] = useState([]);
-    // const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        getOrders(setOrders)
-    }, [])
-
-
-    async function getOrders() {
+    const toDeliver = (order) => {
+        console.log(new Date());
+        alert('Order Ready: ' + new Date());
 
         const token = localStorage.getItem('sessionToken');
-        //console.log('token: ', token);
 
-        await axios.get('http://localhost:8080/orders', {
+        let id = order.id
+
+        order.status = 'delivered';
+
+
+        axios.put(`http://localhost:8080/orders/${id}`, order, {
+
             headers: {
-                'Authorization': `Bearer ${token}`
-            }
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
         })
-            .then((res) => {
-                console.log('res: ', res.data);
-                const response = res.data;
-                setOrders(response);
-            })
-            .catch((error) => {
-                console.error(error)
-            })
     }
 
-    const toDeliver = () => {
-        console.log(new Date());
-        alert('Order Ready: '+ new Date());
-    } 
+    function OrderStatus({singleOrder, status}) {
+        if(status === 'pending') {
+            return <button onClick={() => toDeliver(singleOrder)}>Deliver</button>
+        }
+    }
 
 
     return (
-        <div>
-            <main className='containerOrders'>
-                {orders.map((order) => {
-                    if (order.status === 'pending') {
+        <>
+            <div>
+                <main className='containerOrders'>
+                    {ordersFil.map((order) => {                       
                         return (
                             <div className='cardOrder' key={order.id}>
                                 <h3>{order.client}</h3>
@@ -55,14 +48,19 @@ export default function OrderList() {
                                         </div>
                                     )
                                 })}
-                                <p>Entry: {order.dataEntry}</p>
-                                <button onClick={() => toDeliver()}>Deliver</button>
+                                <p>Entry: {order.dataEntry}</p>            
+                                <OrderStatus 
+                                status={order.status}
+                                singleOrder={order}
+                                />
                             </div>
                         )
                     }
-                }
-                )}
-            </main >
-        </div>
+                    
+                    )}
+                
+                </main >
+            </div>
+        </>
     );
 }
