@@ -3,20 +3,20 @@
 .containerMenu {
     background-color: #181D20;
     height: 100%;
-    padding: 2rem;
+    padding: 2% 6%;;
     color: #FFFF;
     font-family: 'Inria Sans', sans-serif;
     display: grid;
-    gap: 1.5rem;
+    gap: 1.2rem;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
-    ;
     justify-content: center;
 }
 
 .card {
-    background-color: violet;
+    background-color: #282d30;
     width: 12rem;
-    height: 19rem;
+    /* height: 19rem; */
+    border-radius: 1rem;
 }
 
 .card img {
@@ -25,6 +25,7 @@
     object-fit: cover;
     border-radius: 2rem;
     margin-left: 6%;
+    margin-top: 6%;
 }
 
 .card h3 {
@@ -38,36 +39,41 @@
 }
 
 .quantity {
-    background: greenyellow;
+    display: flex;
+    flex-direction: row;
+    padding: 0.8rem;
+    justify-content: space-around;
 }
 
 .card button {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 20px;
-    margin-top: 6%;
+    /* margin-top: 6%; */
     float:inline-end;
+    border: none;
 
     font-size: 2rem;
-    line-height: 42px;
+    /* line-height: 42px; */
     text-align: center;
     color: #FFFFFF;
 }
 
 .cardBtnMore {
     background: #D49223;
-    margin-left: 15%;
+    /* margin-left: 15%; */
 }
 
 .cardBtnLess {
-    margin-right: 18%;
-    background: #6D731F
+    /* margin-right: 18%; */
+    background: #6D731F;
+    color:  #6D731F;
 }
 
 .card input {
     width: 1.5rem;
     height: 2rem;
-    margin-bottom: 6%;
+    /* margin-bottom: 6%; */
     text-align: center;
     font-size: 1.5rem;
 }
@@ -77,4 +83,15 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .containerMenu {
+        padding: 2% 6%;;
+        display: grid;
+        gap: 1.3rem;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
+    
+    }
 }
