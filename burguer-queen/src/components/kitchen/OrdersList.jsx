@@ -1,20 +1,23 @@
 //import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './kitchen.css'
+import moment from 'moment';
 
 export default function OrdersList({ ordersFil }) {
 
     const tab = <>&nbsp;&nbsp;&nbsp;&nbsp;</>;
 
     const toDeliver = (order) => {
-        console.log(new Date());
-        alert('Order Ready: ' + new Date());
 
         const token = localStorage.getItem('sessionToken');
 
         let id = order.id
 
-        order.status = 'delivered';
+        let d = new Date();
+        let formatteddatestr = moment(d).format('hh:mm a');
+
+        order.status = 'delivering';
+        order.dateProcessed = formatteddatestr
 
 
         axios.put(`http://localhost:8080/orders/${id}`, order, {
@@ -26,21 +29,31 @@ export default function OrdersList({ ordersFil }) {
         })
     }
 
-    function OrderStatus({singleOrder, status}) {
-        if(status === 'pending') {
+    function OrderStatus({ singleOrder, status }) {
+        if (status === 'pending') {
             return <button onClick={() => toDeliver(singleOrder)}>Deliver</button>
         }
         else {
-            return <input type="checkbox"/>
+
+            let startTime = moment(singleOrder.dataEntry, 'hh:mm a');
+            let endTime = moment(singleOrder.dateProcessed, 'hh:mm a');
+            let totalTime = endTime.diff(startTime, 'minutes');
+
+            return (
+                <>
+                    <p>Departure: {singleOrder.dateProcessed}</p>
+                    <p className='totalTime'>Total time: {totalTime} minutes</p>            
+                </>
+
+            )
         }
     }
-
 
     return (
         <>
             <div>
                 <main className='containerOrders'>
-                    {ordersFil.map((order) => {                       
+                    {ordersFil.map((order) => {
                         return (
                             <div className='cardOrder' key={order.id}>
                                 <h3>{order.client}</h3>
@@ -51,17 +64,17 @@ export default function OrdersList({ ordersFil }) {
                                         </div>
                                     )
                                 })}
-                                <p>Entry: {order.dataEntry}</p>            
-                                <OrderStatus 
-                                status={order.status}
-                                singleOrder={order}
+                                <p>Entry: {order.dataEntry}</p>
+                                <OrderStatus
+                                    status={order.status}
+                                    singleOrder={order}
                                 />
                             </div>
                         )
                     }
-                    
+
                     )}
-                
+
                 </main >
             </div>
         </>

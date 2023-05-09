@@ -37,8 +37,18 @@ h4 {
 
 p {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.totalTime {
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #d13636;
+    font-weight: bold;
 }
 
 .productsOrder {
@@ -60,7 +70,7 @@ p {
     color: #FFFFFF;
 }
 
-/* ------- NavBar ------- */
+/* ------------------------ NavBar ------------------------ */
 
 .navbar-kitchen {
     display: flex;
