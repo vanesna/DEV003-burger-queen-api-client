@@ -30,6 +30,9 @@ export default function OrdersList({ ordersFil }) {
         if(status === 'pending') {
             return <button onClick={() => toDeliver(singleOrder)}>Deliver</button>
         }
+        else {
+            return <input type="checkbox"/>
+        }
     }
 
 
