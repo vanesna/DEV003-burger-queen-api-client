@@ -1,18 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    marginLeft: '25%',
-  },
-};
+import './Modal.css';
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
@@ -27,9 +15,14 @@ function OrderModal({ children, modalIsOpen, setModalIsOpen }) {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => handleModalState(false)}
-        style={customStyles}
+        className="react-modal-content"
       >
-        <button onClick={() => handleModalState(false)}>close</button>
+        <button
+          onClick={() => handleModalState(false)}
+          className="react-modal-close"
+        >
+          <i className="bi bi-x-circle"></i>{' '}
+        </button>
         {children}
       </Modal>
     </div>

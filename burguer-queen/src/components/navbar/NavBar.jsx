@@ -32,7 +32,10 @@ export default function NavBar({
           Lunch
         </button>
         <button className="order" onClick={() => setModalIsOpen(true)}>
-          <i class="bi bi-clipboard2"></i>
+          <i className="bi bi-clipboard2"></i>
+        </button>
+        <button className="order">
+          <i className="bi bi-clipboard2-check"></i>
         </button>
       </div>
     </nav>
