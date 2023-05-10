@@ -1,26 +1,41 @@
-// import React, { useState } from 'react';
+import React from 'react';
 import './cardsProd.css';
 
-export default function CardsProd({ products, handleAddToOrder }) {
+export default function CardsProd({
+  products,
+  handleAddToOrder,
+  handleRemoveFromOrder,
+  productQuantities,
+}) {
   return (
     <>
       <div className="containerMenu">
         {products.map((product) => {
+          const productId = product.id;
+
           return (
-            <div className="card" key={product.id}>
+            <div className="card" key={productId}>
               <img src={product.image} alt="" />
               <h3>{product.name}</h3>
               <h3 className="cardPrice">${product.price}</h3>
               <div className="quantity">
                 <button
                   className="cardBtnMore"
-                  onClick={() => handleAddToOrder(product.id)}
+                  onClick={() => {
+                    handleAddToOrder(productId);
+                  }}
                 >
                   +
                 </button>
-                {/* {counter} */}
-                <input className="cardInput" type="number" defaultValue={0} />
-                <button className="cardBtnLess">-</button>
+                <p className="cardInput">{productQuantities[productId] || 0}</p>
+                <button
+                  className="cardBtnLess"
+                  onClick={() => {
+                    handleRemoveFromOrder(productId);
+                  }}
+                >
+                  -
+                </button>
               </div>
             </div>
           );
