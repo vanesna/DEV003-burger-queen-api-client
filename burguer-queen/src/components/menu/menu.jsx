@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import './menu.css';
 
 import Header from '../Header/header';
@@ -14,7 +15,7 @@ export default function Menu() {
   const [productsInOrder, setProductsInOrder] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [customer, setCustomer] = useState('');
-  // const [quantity, setQuantity] = useState(0);
+  const [productQuantities, setProductQuantities] = useState({});
 
   const menuDefault = 'Breakfast';
 
@@ -24,39 +25,120 @@ export default function Menu() {
     setFilteredMenu(filteredResults);
   };
 
-  function handleAddToOrder(id) {
-    const newItem = products.filter((product) => product.id === id);
-    setProductsInOrder([...productsInOrder, ...newItem]);
-  }
-
   const handleCustomerName = (event) => {
     const newCustomer = event.target.value;
     setCustomer(newCustomer);
   };
 
+  function handleAddToOrder(id) {
+    const newItem = products.find((product) => product.id === id);
+    const existingItem = productsInOrder.find((item) => item.id === id);
+
+    if (existingItem) {
+      const updatedItem = {
+        ...existingItem,
+        quantity: existingItem.quantity + 1,
+      };
+
+      setProductsInOrder(
+        productsInOrder.map((item) => {
+          if (item.id === id) {
+            return updatedItem;
+          } else {
+            return item;
+          }
+        }),
+      );
+
+      setProductQuantities((prevState) => ({
+        ...prevState,
+        [id]: existingItem.quantity + 1,
+      }));
+    } else {
+      let newProduct = {
+        ...newItem,
+        quantity: 1,
+      };
+
+      setProductsInOrder([...productsInOrder, newProduct]);
+
+      setProductQuantities((prevState) => ({
+        ...prevState,
+        [id]: 1,
+      }));
+    }
+  }
+
+  function handleRemoveFromOrder(id) {
+    const existingItem = productsInOrder.find((item) => item.id === id);
+    if (existingItem) {
+      if (existingItem.quantity > 1) {
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity - 1,
+        };
+
+        setProductsInOrder(
+          productsInOrder.map((item) => {
+            if (item.id === id) {
+              return updatedItem;
+            } else {
+              return item;
+            }
+          }),
+        );
+
+        setProductQuantities((prevState) => ({
+          ...prevState,
+          [id]: existingItem.quantity - 1,
+        }));
+      } else {
+        setProductsInOrder(productsInOrder.filter((item) => item.id !== id));
+        setProductQuantities((prevState) => {
+          const newState = { ...prevState };
+          delete newState[id];
+          return newState;
+        });
+      }
+    }
+  }
+
   const submitOrder = (e) => {
     e.preventDefault();
-    const orderObj = {
-      userId: '',
+    const now = moment();
+    const formattedDate = now.format('YYYY-MM-DD HH:mm:ss');
+    const token = localStorage.getItem('sessionToken');
+    const id = new Date().getTime();
+    const user = JSON.parse(localStorage.getItem('sessionUser'));
+    const productList = productsInOrder.map((product) => product.id);
+    const uniqueProducts = [...new Set(productList)];
+    const products = uniqueProducts.map((id) => {
+      const product = productsInOrder.find((product) => product.id === id);
+      return { qty: product.quantity, product };
+    });
+
+    const order = {
+      id,
+      userId: user.id,
       client: customer,
-      products: [
-        {
-          qty: 1,
-          product: {
-            id: 1,
-            name: '',
-            price: '',
-            image: '',
-            type: '',
-            dateEntry: '',
-          },
-        },
-      ],
+      products,
+      status: 'pending',
+      dataEntry: formattedDate,
     };
-    const productsInaaaa = productsInOrder.forEach((product) =>
-      console.log(product),
-    );
-    console.log('orden enviada');
+    console.log(order);
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    axios
+      .post('http://localhost:8080/orders', order, { headers })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const getProducts = async () => {
@@ -93,7 +175,12 @@ export default function Menu() {
         setModalIsOpen={setModalIsOpen}
         handleCustomerName={handleCustomerName}
       />
-      <CardsProd products={filteredMenu} handleAddToOrder={handleAddToOrder} />
+      <CardsProd
+        products={filteredMenu}
+        handleAddToOrder={handleAddToOrder}
+        handleRemoveFromOrder={handleRemoveFromOrder}
+        productQuantities={productQuantities}
+      />
       <OrderModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
         <Order submitOrder={submitOrder} productsInOrder={productsInOrder} />
       </OrderModal>
