@@ -49,14 +49,14 @@ export default function Home() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="container">
           <input type="text" placeholder="email" {...register('email')} />
-          <p>{errors.email?.message}</p>
+          <span className="error-text">{errors.email?.message}</span>
           <input
             type="password"
             placeholder="password"
             {...register('password')}
           />
-          <p>{errors.password?.message}</p>
-          <p>{serverError}</p>
+          <span className="error-text">{errors.password?.message}</span>
+          <span className="error-text">{serverError}</span>
           <input type="submit" value="Login" className="login-button" />
         </div>
       </form>
