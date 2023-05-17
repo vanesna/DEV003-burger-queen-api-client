@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Login from './components/login/login';
 import Menu from './components/menu/menu';
 import Kitchen from './components/kitchen/kitchen';
+import Workers from './components/workers/Workers';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 function PrivateRoute({ element: Component, ...rest }) {
@@ -22,6 +23,7 @@ root.render(
         <Route path="/menu" element={<PrivateRoute element={Menu} />} />
         <Route path="/" element={<Navigate to="/menu" />} />
         <Route path="/kitchen" element={<PrivateRoute element={Kitchen} />} />
+        <Route path="/workers" element={<PrivateRoute element={Workers} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
