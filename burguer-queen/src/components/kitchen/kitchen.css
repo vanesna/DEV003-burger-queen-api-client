@@ -74,7 +74,7 @@ p {
 
 .navbar-kitchen {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     /* padding: 1rem; */

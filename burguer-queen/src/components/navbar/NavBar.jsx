@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
 export default function NavBar({
@@ -7,6 +7,9 @@ export default function NavBar({
   setModalIsOpen,
   handleCustomerName,
 }) {
+
+  const navigate = useNavigate();
+
   return (
     <nav className="navbar">
       <div className="customer">
@@ -34,7 +37,7 @@ export default function NavBar({
         <button className="order" onClick={() => setModalIsOpen(true)}>
           <i className="bi bi-clipboard2"></i>
         </button>
-        <button className="order">
+        <button className="order" onClick={() => navigate('/orders')}>
           <i className="bi bi-clipboard2-check"></i>
         </button>
       </div>

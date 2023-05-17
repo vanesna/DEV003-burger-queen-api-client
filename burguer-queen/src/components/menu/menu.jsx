@@ -105,8 +105,8 @@ export default function Menu() {
 
   const submitOrder = (e) => {
     e.preventDefault();
-    const now = moment();
-    const formattedDate = now.format('YYYY-MM-DD HH:mm:ss');
+    let d = new Date();
+    let formatteddatestr = moment(d).format('hh:mm a');
     const token = localStorage.getItem('sessionToken');
     const id = new Date().getTime();
     const user = JSON.parse(localStorage.getItem('sessionUser'));
@@ -123,7 +123,7 @@ export default function Menu() {
       client: customer,
       products,
       status: 'pending',
-      dataEntry: formattedDate,
+      dataEntry: formatteddatestr,
     };
     console.log(order);
 
