@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Header/header';
-import NavBarKitchen from './NavBar-kitchen';
-import axios from 'axios';
+import NavBarOrders from './NavBar-orders';
 import CardsOrders from '../cardsOrders/cardsOrders';
-import moment from 'moment';
+import axios from 'axios';
 
-export default function Kitchen() {
+export default function Orders() {
 
     //const [status, setStatus] = useState('pending');
     const [orders, setOrders] = useState([]);
@@ -39,17 +38,13 @@ export default function Kitchen() {
         getOrders(status);
     }
 
-    async function toDelivering  (order)  {
+    async function toDelivered  (order)  {
 
         const token = localStorage.getItem('sessionToken');
 
         let id = order.id
 
-        let d = new Date();
-        let formatteddatestr = moment(d).format('hh:mm a');
-
-        order.status = 'delivering';
-        order.dateProcessed = formatteddatestr
+        order.status = 'delivered';
 
 
         await axios.put(`http://localhost:8080/orders/${id}`, order, {
@@ -61,7 +56,6 @@ export default function Kitchen() {
         })
     }
 
-
     useEffect(() => {
         getOrders('pending')
     }, [])
@@ -70,12 +64,12 @@ export default function Kitchen() {
     return (
         <div>
             <Header />
-            <h1>Orders</h1>
-            <NavBarKitchen 
+            {/* <h1>Orders</h1> */}
+            <NavBarOrders 
             handleOrderStatus={handleOrderStatus} />
             <CardsOrders 
             orders={orders}
-            handleToDelivering={toDelivering} />
+            handleToDelivering={toDelivered} />
 
         </div>
     );
