@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function OptionsKitchen({ location, singleOrder, status }) {
 
 
-    
+
     async function toDelivering(order) {
 
         toast.success('Order ready', {
@@ -38,7 +38,7 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
     }
 
     async function toDelivered(order) {
-        
+
         toast.success('The order was delivered', {
             position: "bottom-center",
             autoClose: 2000,
@@ -89,8 +89,10 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
 
         return (
             <>
-                <Checkbox onChange={() => toDelivered(singleOrder)} />
-                <ToastContainer />
+                <div className='checkbox'>
+                    <Checkbox onChange={() => toDelivered(singleOrder)} />
+                    <ToastContainer />
+                </div>
             </>
 
         )
@@ -100,7 +102,9 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
 
         return (
             <>
-                <i class="bi bi-check2-square"> Delivered</i>
+                <div className='orderChecked'>
+                    <i className="bi bi-check2-square"> Delivered</i>
+                </div>
             </>
 
         )

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../kitchen/kitchen.css'
+import './cardsOrders.css'
 import OptionsKitchen from '../kitchen/optionsKitchen';
 import { useLocation } from "react-router-dom";
 
