@@ -1,31 +1,14 @@
-//import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../kitchen/kitchen.css'
-import moment from 'moment';
+import OptionsKitchen from '../kitchen/optionsKitchen';
+import { useLocation } from "react-router-dom";
 
-export default function CardsOrders({orders,  handleToDelivering}) {
+export default function CardsOrders({ orders }) {
 
     const tab = <>&nbsp;&nbsp;&nbsp;&nbsp;</>;
 
-
-    function OrderStatus({ singleOrder, status }) {
-        if (status === 'pending') {
-            return <button onClick={() =>  handleToDelivering(singleOrder)}>Deliver</button>
-        }
-        else {
-
-            let startTime = moment(singleOrder.dataEntry, 'hh:mm a');
-            let endTime = moment(singleOrder.dateProcessed, 'hh:mm a');
-            let totalTime = endTime.diff(startTime, 'minutes');
-
-            return (
-                <>
-                    <p>Departure: {singleOrder.dateProcessed}</p>
-                    <p className='totalTime'>Total time: {totalTime} minutes</p>            
-                </>
-
-            )
-        }
-    }
+    let location = useLocation();
+    // console.log(location.pathname)
 
     return (
         <>
@@ -41,9 +24,9 @@ export default function CardsOrders({orders,  handleToDelivering}) {
                                             <h4 className='productsOrder'>{products.qty}{tab}{products.product.name}</h4>
                                         </div>
                                     )
-                                })}
-                                <p>Entry: {order.dataEntry}</p>
-                                <OrderStatus
+                                })}                            
+                                <OptionsKitchen
+                                    location={location.pathname}
                                     status={order.status}
                                     singleOrder={order}
                                 />

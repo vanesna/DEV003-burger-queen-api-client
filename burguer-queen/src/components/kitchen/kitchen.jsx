@@ -3,7 +3,6 @@ import Header from '../Header/header';
 import NavBarKitchen from './NavBar-kitchen';
 import axios from 'axios';
 import CardsOrders from '../cardsOrders/cardsOrders';
-import moment from 'moment';
 
 export default function Kitchen() {
 
@@ -39,27 +38,6 @@ export default function Kitchen() {
         getOrders(status);
     }
 
-    async function toDelivering  (order)  {
-
-        const token = localStorage.getItem('sessionToken');
-
-        let id = order.id
-
-        let d = new Date();
-        let formatteddatestr = moment(d).format('hh:mm a');
-
-        order.status = 'delivering';
-        order.dateProcessed = formatteddatestr
-
-
-        await axios.put(`http://localhost:8080/orders/${id}`, order, {
-
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-    }
 
 
     useEffect(() => {
@@ -75,7 +53,7 @@ export default function Kitchen() {
             handleOrderStatus={handleOrderStatus} />
             <CardsOrders 
             orders={orders}
-            handleToDelivering={toDelivering} />
+            />
 
         </div>
     );

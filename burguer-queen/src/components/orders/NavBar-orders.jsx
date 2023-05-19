@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBarKitchen from '../kitchen/NavBar-kitchen';
+import ButtonNavBar from '../button-Navbar/button-Navbar';
 import { useNavigate } from 'react-router-dom';
 import './orders.css';
 
@@ -15,7 +15,16 @@ export default function NavBarOrders({ handleOrderStatus }) {
             <button className='BackToMenu' onClick={() => navigate('/menu')}>
                 <i className="bi bi-arrow-left"></i> Menu
             </button>
-            <NavBarKitchen handleOrderStatus={handleOrderStatus} />
+            <ButtonNavBar
+                    value='delivering'
+                    text='Ready'
+                    onClick={handleOrderStatus}
+                />
+                <ButtonNavBar
+                    value='delivered'
+                    text='Delivered'
+                    onClick={handleOrderStatus}
+                />
             </div>
         </nav>
     );

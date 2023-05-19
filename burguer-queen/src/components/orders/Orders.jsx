@@ -57,7 +57,7 @@ export default function Orders() {
     }
 
     useEffect(() => {
-        getOrders('pending')
+        getOrders('delivering')
     }, [])
 
 
