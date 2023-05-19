@@ -1,54 +1,35 @@
 .navbar-orders {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    /* padding: 1rem; */
+    padding: 1rem;
     max-width: 70%;
-    margin: 15px auto;
+    margin: 1rem auto;
 }
 
-.button-group-orders {
+
+.buttonToMenu {
     display: flex;
     flex: 1;
     margin: 10px auto;
-    flex-wrap: wrap;
     width: 90%;
 }
 
-/* .BackToMenu, .button-group-kitchen button {
-    flex: 1;
+.buttonToMenu button{
     color: #fff;
     padding: 12px;
     border: none;
     border-radius: 12px;
     background-color: #d49223;
     text-align: center;
-    font-size: 14px;
-} */
-
-.BackToMenu {
-    background-color: #d49223;
-    border-radius: 12px;
+    font-size: 1.1rem;
 }
 
-
-
-navbar-kitchen {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    /* padding: 1rem; */
-    max-width: 50%;
-    margin: 15px auto;
-}
-
-.button-group-kitchen {
+.button-group-orders {
     display: flex;
     flex: 1;
     margin: 10px auto;
-    flex-wrap: wrap;
     width: 90%;
 }
 
@@ -63,17 +44,21 @@ navbar-kitchen {
     font-size: 14px;
 }
 
-.button-group-kitchen button:first-child {
+
+
+
+
+.button-group-orders button:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.button-group-kitchen button:nth-child(2) {
+.button-group-orders button:nth-child(2) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.button-group-kitchen button:not(:last-child) {
+.button-group-orders button:not(:last-child) {
     margin-right: -1px;
     /* border: 1px solid red; */
 }
@@ -81,26 +66,26 @@ navbar-kitchen {
 @media only screen and (min-width: 768px) {
 
 
-    .button-group-kitchen button {
+    .button-group-orders button {
         /* width: 290px; */
         padding: 8px;
         font-size: 18px;
     }
 
-    .button-group-kitchen button:hover {
+    .button-group-orders button:hover {
         background-color: #8b5e13;
     }
 }
 
 @media only screen and (min-width: 1024px) {
-    .navbar-kitchen {
+    .navbar-orders {
         /* max-width: 1024px; */
         margin: 15px auto;
         flex-direction: row;
         gap: 30px;
     }
 
-    .button-group-kitchen button {
+    .button-group-orders button {
         /* width: 120px; */
         padding: 10px;
         font-size: 20px;
@@ -108,7 +93,7 @@ navbar-kitchen {
         /* width: 80%; */
     }
 
-    .button-group-kitchen button:hover {
+    .button-group-orders button:hover {
         background-color: #8b5e13;
     }
 }

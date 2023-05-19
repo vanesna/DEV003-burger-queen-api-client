@@ -13,7 +13,7 @@
 
 .cardOrder {
     background-color: #D49223;
-    width: 13rem;
+    width: 12rem;
     /* height: 19rem; */
     border-radius: 1rem;
     padding: 5%;
@@ -55,7 +55,7 @@ p {
     color: black;
 }
 
-.cardOrder button {
+.buttonOrders {
 
     width: 8rem;
     height: 2.3rem;

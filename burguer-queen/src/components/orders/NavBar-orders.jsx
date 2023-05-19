@@ -11,11 +11,13 @@ export default function NavBarOrders({ handleOrderStatus }) {
 
     return (
         <nav className="navbar-orders">
+            <div className="buttonToMenu">
+                <button onClick={() => navigate('/menu')}>
+                    <i className="bi bi-arrow-left"></i> Menu
+                </button>
+            </div>
             <div className="button-group-orders">
-            <button className='BackToMenu' onClick={() => navigate('/menu')}>
-                <i className="bi bi-arrow-left"></i> Menu
-            </button>
-            <ButtonNavBar
+                <ButtonNavBar
                     value='delivering'
                     text='Ready'
                     onClick={handleOrderStatus}

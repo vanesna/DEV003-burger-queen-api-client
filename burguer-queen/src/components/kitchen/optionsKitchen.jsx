@@ -11,6 +11,12 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
     
     async function toDelivering(order) {
 
+        toast.success('Order ready', {
+            position: "bottom-center",
+            autoClose: 2000,
+            theme: "dark",
+        })
+
         const token = localStorage.getItem('sessionToken');
 
         let id = order.id
@@ -32,11 +38,11 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
     }
 
     async function toDelivered(order) {
-
-        console.log('Entregado')
-        toast.success('The order was sent', {
+        
+        toast.success('The order was delivered', {
             position: "bottom-center",
-            autoClose: 2000
+            autoClose: 2000,
+            theme: "dark",
         })
 
         const token = localStorage.getItem('sessionToken');
@@ -58,7 +64,8 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
         return (
             <>
                 <p>Entry: {singleOrder.dataEntry}</p>
-                <button onClick={() => toDelivering(singleOrder)}>Deliver</button>
+                <button className='buttonOrders' onClick={() => toDelivering(singleOrder)}>Deliver</button>
+                <ToastContainer />
             </>
         )
 
@@ -93,8 +100,7 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
 
         return (
             <>
-                <Checkbox onChange={() => toDelivered(singleOrder)} />
-                <ToastContainer />
+                <i class="bi bi-check2-square"> Delivered</i>
             </>
 
         )
