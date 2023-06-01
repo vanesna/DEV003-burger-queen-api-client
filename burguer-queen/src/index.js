@@ -6,6 +6,7 @@ import Kitchen from './components/kitchen/kitchen';
 import Workers from './components/workers/Workers';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Orders from './components/orders/Orders';
+import Products from './components/products/Products';
 
 function PrivateRoute({ element: Component, ...rest }) {
   const sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
@@ -26,6 +27,7 @@ root.render(
         <Route path="/kitchen" element={<PrivateRoute element={Kitchen} />} />
         <Route path="/workers" element={<PrivateRoute element={Workers} />} />
         <Route path="/orders" element={<PrivateRoute element={Orders} />} />
+        <Route path="/products" element={<PrivateRoute element={Products} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
