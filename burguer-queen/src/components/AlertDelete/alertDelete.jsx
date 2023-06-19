@@ -6,6 +6,7 @@ import './alertDelete.css'
 
 export default function AlertDelete({ singleProduct }) {
 
+    console.log(singleProduct)
     function toDelete() {
 
         toast.success('Deleted product', {

@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import OrderModal from '../UI/Modal';
+// import SingleProduct from '../SingleProduct/SingleProduct';
 import AlertDelete from '../AlertDelete/alertDelete';
 import '../cardsProd/cardsProd.css';
 import './products.css'
 
-export default function CardsAllProducts() {
+export default function CardsAllProducts({ setModalIsOpen }) {
 
     const [allProducts, setAllProducts] = useState([]);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [selectedProduct, setselectedProduct] = useState({});
+
+    // const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalIsOpen2, setModalIsOpen2] = useState(false);
 
     const getAllProducts = async () => {
         const token = localStorage.getItem('sessionToken');
@@ -33,16 +37,11 @@ export default function CardsAllProducts() {
         getAllProducts();
     }, []);
 
-    function handleEditProduct() {
-        console.log('edit');
-    }
-
     return (
         <>
             <div className="containerMenu">
                 {allProducts.map((product) => {
                     const productId = product.id;
-
                     return (
                         <div className="card" key={productId}>
                             <img src={product.image} alt="" />
@@ -50,25 +49,26 @@ export default function CardsAllProducts() {
                             <div className="optionsProducts">
                                 <button
                                     className="cardBtnEdit"
-                                    onClick={() => {
-                                        handleEditProduct(productId);
-                                    }}
+                                    onClick={() => setModalIsOpen(true)}
                                 >
                                     <i className="bi bi-pencil-fill"></i>
                                 </button>
                                 <button
                                     className="cardBtnDelete"
-                                    onClick={() => setModalIsOpen(true)}
+                                    onClick={() => setModalIsOpen2(true)}
                                 >
                                     <i className="bi bi-trash"></i>
                                 </button>
                             </div>
-                            <OrderModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-                                <AlertDelete 
-                                singleProduct={product}/>
+
+                            <OrderModal modalIsOpen={modalIsOpen2} setModalIsOpen={setModalIsOpen2}>
+                                <AlertDelete
+                                    singleProduct={product} />
                             </OrderModal>
+
                         </div>
                     );
+
                 })}
             </div>
         </>
