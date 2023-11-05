@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './CardWorker.css';
+import React, { useState } from "react";
+import "./CardWorker.css";
 
-export default function CardWorker({ workers }) {
+export default function CardWorker({ workers, deleteWorker }) {
   return (
     <section id="workers">
       {workers.map((worker) => {
@@ -15,7 +14,7 @@ export default function CardWorker({ workers }) {
               <button>
                 <i className="bi bi-pen"></i>
               </button>
-              <button>
+              <button onClick={(e) => deleteWorker(worker.id, e)}>
                 <i className="bi bi-trash3"></i>
               </button>
             </div>

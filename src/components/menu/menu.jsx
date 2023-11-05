@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import moment from 'moment';
-import './menu.css';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import moment from "moment";
+import "./menu.css";
 
-import Header from '../Header/header';
-import NavBar from '../navbar/NavBar';
-import CardsProd from '../cardsProd/cardsProd';
-import Order from '../order/Order';
-import OrderModal from '../UI/Modal';
+import Header from "../Header/header";
+import NavBar from "../navbar/NavBar";
+import CardsProd from "../cardsProd/cardsProd";
+import Order from "../order/Order";
+import OrderModal from "../UI/Modal";
 
 export default function Menu() {
   const [products, setProducts] = useState([]);
   const [filteredMenu, setFilteredMenu] = useState([]);
   const [productsInOrder, setProductsInOrder] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [customer, setCustomer] = useState('');
+  const [customer, setCustomer] = useState("");
   const [productQuantities, setProductQuantities] = useState({});
 
-  const menuDefault = 'Breakfast';
+  const menuDefault = "Breakfast";
 
   const handleMenu = (event) => {
     const type = event?.target.value || menuDefault;
@@ -47,7 +47,7 @@ export default function Menu() {
           } else {
             return item;
           }
-        }),
+        })
       );
 
       setProductQuantities((prevState) => ({
@@ -85,7 +85,7 @@ export default function Menu() {
             } else {
               return item;
             }
-          }),
+          })
         );
 
         setProductQuantities((prevState) => ({
@@ -105,11 +105,14 @@ export default function Menu() {
 
   const submitOrder = (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("sessionToken");
+    if (!token) {
+      return;
+    }
     let d = new Date();
-    let formatteddatestr = moment(d).format('hh:mm a');
-    const token = localStorage.getItem('sessionToken');
+    let formatteddatestr = moment(d).format("hh:mm a");
     const id = new Date().getTime();
-    const user = JSON.parse(localStorage.getItem('sessionUser'));
+    const user = JSON.parse(localStorage.getItem("sessionUser"));
     const productList = productsInOrder.map((product) => product.id);
     const uniqueProducts = [...new Set(productList)];
     const products = uniqueProducts.map((id) => {
@@ -122,17 +125,17 @@ export default function Menu() {
       userId: user.id,
       client: customer,
       products,
-      status: 'pending',
+      status: "pending",
       dataEntry: formatteddatestr,
     };
     console.log(order);
 
     const headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
     axios
-      .post('http://localhost:8080/orders', order, { headers })
+      .post("http://localhost:8080/orders", order, { headers })
       .then((response) => {
         console.log(response);
       })
@@ -142,18 +145,21 @@ export default function Menu() {
   };
 
   const getProducts = async () => {
-    const token = localStorage.getItem('sessionToken');
+    const token = localStorage.getItem("sessionToken");
+    if (!token) {
+      return;
+    }
     await axios
-      .get('http://localhost:8080/products', {
+      .get("http://localhost:8080/products", {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
         const response = res.data;
         const filteredResults = response.filter(
-          (product) => product.type === menuDefault,
+          (product) => product.type === menuDefault
         );
         setProducts(response);
         setFilteredMenu(filteredResults);
