@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
+
+.containerOrders {
+    height: 100%;
+    padding: 2% 12%;;
+    color: #FFFF;
+    font-family: 'Inria Sans', sans-serif;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
+    justify-content: center;
+}
+
+.cardOrder {
+    background-color: #D49223;
+    width: 13rem;
+    /* height: 19rem; */
+    border-radius: 1rem;
+    padding: 5%;
+}
+
+h1 {
+    color: #FFFFFF;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.cardOrder h3 {
+    margin-top: 0.5rem;
+    text-align: center;
+    background-color: #ECB251;
+}
+
+h4 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.totalTime {
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #d13636;
+    font-weight: bold;
+}
+
+.productsOrder {
+    color: black;
+}
+
+.cardOrder button {
+
+    width: 8rem;
+    height: 2.3rem;
+    border-radius: 0.8rem;
+    margin-left: 19%;
+    background-color: #711E62;
+    border: none;
+
+    font-size: 1.3rem;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/* ------------------------ NavBar ------------------------ */
+
+.navbar-kitchen {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* padding: 1rem; */
+    max-width: 50%;
+    margin: 15px auto;
+}
+
+.button-group-kitchen {
+    display: flex;
+    flex: 1;
+    margin: 10px auto;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.button-group-kitchen button {
+    flex: 1;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background-color: #d49223;
+    text-align: center;
+    font-size: 14px;
+}
+
+.button-group-kitchen button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.button-group-kitchen button:nth-child(2) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.button-group-kitchen button:not(:last-child) {
+    margin-right: -1px;
+    /* border: 1px solid red; */
+}
+
+@media only screen and (min-width: 768px) {
+
+
+    .button-group-kitchen button {
+        /* width: 290px; */
+        padding: 8px;
+        font-size: 18px;
+    }
+
+    .button-group-kitchen button:hover {
+        background-color: #8b5e13;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .navbar-kitchen {
+        /* max-width: 1024px; */
+        margin: 15px auto;
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .button-group-kitchen button {
+        /* width: 120px; */
+        padding: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        /* width: 80%; */
+    }
+
+    .button-group-kitchen button:hover {
+        background-color: #8b5e13;
+    }
+}

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
+
+body {
+  margin: 0;
+}
+
+.background-image {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
+}
+
+.heading {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+  font-size: 40px;
+  color: #d49223;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  height: 50vh;
+  max-height: 600px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  background-color: rgba(40, 49, 54, 0.8);
+  font-family: 'Inria Sans', sans-serif;
+}
+
+.container input {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+  color: #1e1e1e;
+}
+
+.error.container {
+  margin: 200px;
+}
+
+.error-text {
+  color: red;
+}
+
+.container .login-button {
+  width: 10rem;
+  height: 3rem;
+  left: 425px;
+  top: 467.5px;
+  background: #d49223;
+  border-radius: 30px;
+  font-family: 'Inria Sans';
+  font-size: 1.5rem;
+  color: #1e1e1e;
+}
+
+.container .login-button:hover {
+  background-color: #ecb251;
+  transition: 0.7s;
+}
