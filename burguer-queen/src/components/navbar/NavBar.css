@@ -35,7 +35,7 @@
   border-radius: 12px;
   background-color: #d49223;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .button-group button:first-child {
@@ -65,6 +65,28 @@
 .button-group button.order:hover {
   background-color: #4f5320;
 }
+
+.button-group button:hover {
+  background-color: #8b5e13;
+}
+
+.button-group .menu-btn {
+  background-color: #d49223; /* Color por defecto */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.button-group .menu-btn:hover {
+  background-color: #8b5e13; /* Color al pasar el mouse */
+}
+
+.button-group .menu-btn.active {
+  background-color: #8b5e13; /* Color cuando está activo */
+  color: white;
+  font-weight: bold;
+}
+
 
 @media only screen and (min-width: 768px) {
   .customer {
