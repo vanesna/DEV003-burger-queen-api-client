@@ -1,12 +1,13 @@
 import React from "react";
 import '../kitchen/kitchen.css';
 
-export default function ButtonNavBar({ value, text, onClick }) {
+export default function ButtonNavBar({ value, text, onClick, isActive }) {
     return (
         <button
-        
-        onClick={(e) => onClick(e)}
-            value={value}>
+            onClick={onClick}
+            value={value}
+            className={isActive ? "active" : ""}
+        >
             {text}
         </button>
     )
