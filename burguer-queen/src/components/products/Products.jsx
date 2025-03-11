@@ -6,7 +6,7 @@ import Header from "../Header/header";
 import NavBarProducts from "./NavBar-Products";
 import OrderModal from '../UI/Modal';
 import SingleProduct from "../SingleProduct/SingleProduct";
-import AlertDelete from "../AlertDelete/alertDelete";
+
 
 export default function Products() {
 

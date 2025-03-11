@@ -101,6 +101,11 @@ p {
     font-size: 14px;
 }
 
+.button-group-kitchen button.active {
+    background-color: #8b5e13;
+    font-weight: bold;
+  }
+
 .button-group-kitchen button:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;

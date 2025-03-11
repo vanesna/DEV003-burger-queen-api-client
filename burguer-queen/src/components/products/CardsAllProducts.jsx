@@ -2,75 +2,111 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import OrderModal from '../UI/Modal';
-// import SingleProduct from '../SingleProduct/SingleProduct';
+import SingleProduct from '../SingleProduct/SingleProduct';
 import AlertDelete from '../AlertDelete/alertDelete';
 import '../cardsProd/cardsProd.css';
-import './products.css'
+import './products.css';
 
 export default function CardsAllProducts({ setModalIsOpen }) {
-
     const [allProducts, setAllProducts] = useState([]);
-    const [selectedProduct, setselectedProduct] = useState({});
+    const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+    const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
-    // const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [modalIsOpen2, setModalIsOpen2] = useState(false);
-
+    // Función para obtener los productos
     const getAllProducts = async () => {
         const token = localStorage.getItem('sessionToken');
-        await axios
-            .get('http://localhost:8080/products', {
+        try {
+            const res = await axios.get('http://localhost:8080/products', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-            })
-            .then((res) => {
-                const response = res.data;
-                setAllProducts(response);
-            })
-            .catch((error) => {
-                console.error(error);
             });
+            setAllProducts(res.data);
+        } catch (error) {
+            console.error('Error al obtener los productos:', error);
+        }
     };
 
     useEffect(() => {
         getAllProducts();
     }, []);
 
+    // Función para eliminar un producto
+    const handleDeleteProduct = async (productId) => {
+        const token = localStorage.getItem('sessionToken');
+        try {
+            await axios.delete(`http://localhost:8080/products/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            // Refrescar la lista de productos después de eliminar
+            getAllProducts();
+
+            // Cerrar el modal después de eliminar
+            setDeleteModalIsOpen(false);
+            setSelectedProduct(null);
+        } catch (error) {
+            console.error('Error al eliminar el producto:', error);
+        }
+    };
+
     return (
         <>
             <div className="containerMenu">
-                {allProducts.map((product) => {
-                    const productId = product.id;
-                    return (
-                        <div className="card" key={productId}>
-                            <img src={product.image} alt="" />
-                            <h3>{product.name}</h3>
-                            <div className="optionsProducts">
-                                <button
-                                    className="cardBtnEdit"
-                                    onClick={() => setModalIsOpen(true)}
-                                >
-                                    <i className="bi bi-pencil-fill"></i>
-                                </button>
-                                <button
-                                    className="cardBtnDelete"
-                                    onClick={() => setModalIsOpen2(true)}
-                                >
-                                    <i className="bi bi-trash"></i>
-                                </button>
-                            </div>
-
-                            <OrderModal modalIsOpen={modalIsOpen2} setModalIsOpen={setModalIsOpen2}>
-                                <AlertDelete
-                                    singleProduct={product} />
-                            </OrderModal>
-
+                {allProducts.map((product) => (
+                    <div className="card" key={product.id}>
+                        <img src={product.image} alt="" />
+                        <h3>{product.name}</h3>
+                        <div className="optionsProducts">
+                            <button
+                                className="cardBtnEdit"
+                                onClick={() => {
+                                    setSelectedProduct(product);
+                                    setEditModalIsOpen(true);
+                                }}
+                            >
+                                <i className="bi bi-pencil-fill"></i>
+                            </button>
+                            <button
+                                className="cardBtnDelete"
+                                onClick={() => {
+                                    setSelectedProduct(product);
+                                    setDeleteModalIsOpen(true);
+                                }}
+                            >
+                                <i className="bi bi-trash"></i>
+                            </button>
                         </div>
-                    );
-
-                })}
+                    </div>
+                ))}
             </div>
+
+            {/* Modal para editar producto */}
+            <OrderModal modalIsOpen={editModalIsOpen} setModalIsOpen={setEditModalIsOpen}>
+                {selectedProduct && (
+                    <SingleProduct
+                        product={selectedProduct}
+                        closeModal={() => setEditModalIsOpen(false)}
+                        refreshProducts={getAllProducts} 
+                    />
+                )}
+            </OrderModal>
+
+            {/* Modal para confirmar eliminación */}
+            <OrderModal modalIsOpen={deleteModalIsOpen} setModalIsOpen={setDeleteModalIsOpen}>
+                {selectedProduct && (
+                    <AlertDelete
+                        singleProduct={selectedProduct}
+                        confirmDelete={() => handleDeleteProduct(selectedProduct.id)}
+                        closeModal={() => setDeleteModalIsOpen(false)}
+                    />
+                )}
+            </OrderModal>
         </>
     );
 }

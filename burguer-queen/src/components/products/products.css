@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: row;
     padding: 0.8rem;
-    justify-content: flex-end;
+    justify-content: space-around;
 }
 
 .cardBtnEdit {
