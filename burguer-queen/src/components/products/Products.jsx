@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import CardsAllProducts from "./CardsAllProducts";
 import Header from "../Header/header";
@@ -11,28 +11,39 @@ import SingleProduct from "../SingleProduct/SingleProduct";
 export default function Products() {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    // const [modalIsOpen2, setModalIsOpen2] = useState(false);
-    // const [selectedProduct, setselectedProduct] = useState({});
+    const [allProducts, setAllProducts] = useState([]); // Estado para almacenar productos
+
+    // Función para obtener productos
+    const getAllProducts = async () => {
+        const token = localStorage.getItem('sessionToken');
+        try {
+            const res = await axios.get('http://localhost:8080/products', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            setAllProducts(res.data); // Actualiza la lista de productos
+        } catch (error) {
+            console.error('Error al obtener los productos:', error);
+        }
+    };
+
+    // Cargar productos al montar el componente
+    useEffect(() => {
+        getAllProducts();
+    }, []);
 
     return (
         <>
             <Header />
-            <NavBarProducts
-                setModalIsOpen={setModalIsOpen} />
-            <CardsAllProducts
-                // getProduct={selectedProduct}
-                setModalIsOpen={setModalIsOpen}
-                // setModalIsOpen2={setModalIsOpen2} 
-                />
+            <NavBarProducts setModalIsOpen={setModalIsOpen} />
+            <CardsAllProducts setModalIsOpen={setModalIsOpen} allProducts={allProducts} getAllProducts={getAllProducts} />
 
+            {/* Modal para agregar productos */}
             <OrderModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-                <SingleProduct />
+                <SingleProduct closeModal={() => setModalIsOpen(false)} refreshProducts={getAllProducts} />
             </OrderModal>
-            {/* <OrderModal modalIsOpen={modalIsOpen2} setModalIsOpen={setModalIsOpen2}>
-                <AlertDelete
-                    singleProduct={selectedProduct}
-                    setModalIsOpen={setModalIsOpen} />
-            </OrderModal> */}
         </>
     )
 

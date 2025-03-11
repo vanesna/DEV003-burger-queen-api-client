@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 import OrderModal from '../UI/Modal';
@@ -7,33 +7,12 @@ import AlertDelete from '../AlertDelete/alertDelete';
 import '../cardsProd/cardsProd.css';
 import './products.css';
 
-export default function CardsAllProducts({ setModalIsOpen }) {
-    const [allProducts, setAllProducts] = useState([]);
+export default function CardsAllProducts({ setModalIsOpen, allProducts, getAllProducts }) {
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
-    // Función para obtener los productos
-    const getAllProducts = async () => {
-        const token = localStorage.getItem('sessionToken');
-        try {
-            const res = await axios.get('http://localhost:8080/products', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-            setAllProducts(res.data);
-        } catch (error) {
-            console.error('Error al obtener los productos:', error);
-        }
-    };
-
-    useEffect(() => {
-        getAllProducts();
-    }, []);
-
-    // Función para eliminar un producto
+    // ✅ Función para eliminar producto
     const handleDeleteProduct = async (productId) => {
         const token = localStorage.getItem('sessionToken');
         try {
@@ -44,10 +23,7 @@ export default function CardsAllProducts({ setModalIsOpen }) {
                 },
             });
 
-            // Refrescar la lista de productos después de eliminar
-            getAllProducts();
-
-            // Cerrar el modal después de eliminar
+            getAllProducts(); // ✅ Refrescar lista de productos
             setDeleteModalIsOpen(false);
             setSelectedProduct(null);
         } catch (error) {
@@ -60,7 +36,7 @@ export default function CardsAllProducts({ setModalIsOpen }) {
             <div className="containerMenu">
                 {allProducts.map((product) => (
                     <div className="card" key={product.id}>
-                        <img src={product.image} alt="" />
+                        <img src={product.image} alt={product.name} />
                         <h3>{product.name}</h3>
                         <div className="optionsProducts">
                             <button
@@ -86,7 +62,7 @@ export default function CardsAllProducts({ setModalIsOpen }) {
                 ))}
             </div>
 
-            {/* Modal para editar producto */}
+            {/* ✅ Modal para editar */}
             <OrderModal modalIsOpen={editModalIsOpen} setModalIsOpen={setEditModalIsOpen}>
                 {selectedProduct && (
                     <SingleProduct
@@ -97,7 +73,7 @@ export default function CardsAllProducts({ setModalIsOpen }) {
                 )}
             </OrderModal>
 
-            {/* Modal para confirmar eliminación */}
+            {/* ✅ Modal para eliminar */}
             <OrderModal modalIsOpen={deleteModalIsOpen} setModalIsOpen={setDeleteModalIsOpen}>
                 {selectedProduct && (
                     <AlertDelete
