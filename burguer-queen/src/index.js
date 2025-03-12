@@ -25,7 +25,7 @@ root.render(
         <Route path="/menu" element={<PrivateRoute element={Menu} />} />
         <Route path="/" element={<Navigate to="/menu" />} />
         <Route path="/kitchen" element={<PrivateRoute element={Kitchen} />} />
-        <Route path="/workers" element={<PrivateRoute element={Workers} />} />
+        <Route path="/users" element={<PrivateRoute element={Workers} />} />
         <Route path="/orders" element={<PrivateRoute element={Orders} />} />
         <Route path="/products" element={<PrivateRoute element={Products} />} />
       </Routes>
