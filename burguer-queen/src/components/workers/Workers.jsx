@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import Header from '../Header/header';
-import CardWorker from './CardWorker';
+import NavWorker from './NavWorkers';
+import CardAllWorker from './CardAllWorker';
+import OrderModal from '../UI/Modal';
+import SingleWorker from './SingleWorker';
 
 export default function Users() {
+
   const [workers, setWorkers] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const getWorkers = () => {
     const token = localStorage.getItem('sessionToken');
@@ -29,9 +35,14 @@ export default function Users() {
   }, []);
 
   return (
-    <div>
+    <>
       <Header />
-      <CardWorker workers={workers} />
-    </div>
+      <NavWorker setModalIsOpen={setModalIsOpen} />
+      <CardAllWorker setModalIsOpen={setModalIsOpen} workers={workers} getWorkers={getWorkers} />
+
+      <OrderModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+        <SingleWorker closeModal={() => setModalIsOpen(false)} refreshWorkers={getWorkers} />
+      </OrderModal>
+    </>
   );
 }

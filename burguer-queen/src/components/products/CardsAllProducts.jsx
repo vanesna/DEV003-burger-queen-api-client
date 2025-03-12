@@ -77,7 +77,7 @@ export default function CardsAllProducts({ setModalIsOpen, allProducts, getAllPr
             <OrderModal modalIsOpen={deleteModalIsOpen} setModalIsOpen={setDeleteModalIsOpen}>
                 {selectedProduct && (
                     <AlertDelete
-                        singleProduct={selectedProduct}
+                        item={selectedProduct}
                         confirmDelete={() => handleDeleteProduct(selectedProduct.id)}
                         closeModal={() => setDeleteModalIsOpen(false)}
                     />

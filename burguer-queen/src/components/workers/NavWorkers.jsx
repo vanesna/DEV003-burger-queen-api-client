@@ -1,10 +1,10 @@
 import React from 'react';
 import './CardWorker.css';
 
-export default function Nav() {
+export default function NavWorker({ setModalIsOpen }) {  // Asegurar que se recibe setModalIsOpen como prop
   return (
-    <nav>
-      <button>ADD</button>
+    <nav className="buttonToAdd">
+      <button onClick={() => setModalIsOpen(true)}>add</button>
     </nav>
   );
 }
