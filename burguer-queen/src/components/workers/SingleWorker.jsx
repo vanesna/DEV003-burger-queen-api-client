@@ -6,56 +6,53 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../SingleProduct/singleProduct.css';
 
 export default function SingleWorker({ worker, closeModal, refreshWorkers }) {
-    // Estado inicial basado en si es edición o nuevo producto
     const [form, setForm] = useState({
-        email: "",
-        password: "",
-        image: "",
-        role: "Waiter",
+        email: worker?.email || "",
+        password: "",  // No mostramos la contraseña encriptada
+        image: worker?.image || "",
+        role: worker?.role || "Waiter",
     });
 
-    // Si hay un producto (modo edición), llenar el formulario
     useEffect(() => {
         if (worker) {
-            setForm({
-                email: worker.email,
-                password: worker.password,
-                image: worker.image,
-                role: worker.role,
-            });
+            setForm(prevForm => ({
+                ...prevForm,
+                password: worker.password, // Guardamos la contraseña encriptada
+            }));
         }
     }, [worker]);
 
-    // Manejar cambios en los inputs
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
-    // Manejar envío del formulario (Agregar o Editar)
     function submitWorker(e) {
         e.preventDefault();
         const token = localStorage.getItem('sessionToken');
         const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
 
-        // Si hay un producto, es edición (PUT)
+        let updatedWorker = { ...form };
+
+        // Si el usuario no cambia la contraseña, enviamos la original
+        if (!form.password) {
+            updatedWorker.password = worker?.password;
+        }
+
         if (worker) {
             axios
-                .put(`http://localhost:8080/users/${worker.id}`, form, { headers })
+                .put(`http://localhost:8080/users/${worker.id}`, updatedWorker, { headers })
                 .then(() => {
-                    //toast.success('Product updated successfully!', { position: "bottom-center", autoClose: 2000, theme: "dark" });
-                    refreshWorkers(); // Refrescar lista de productos
-                    closeModal(); // Cerrar modal
+                    refreshWorkers();
+                    closeModal();
                 })
                 .catch((error) => console.error(error));
         } else {
-            // Si no hay un producto, es nuevo (POST)
-            const newWorker = { ...form, dateEntry: moment().format('LLL') };
+            updatedWorker.dateEntry = moment().format('LLL');
             axios
-                .post('http://localhost:8080/users', newWorker, { headers })
+                .post('http://localhost:8080/users', updatedWorker, { headers })
                 .then(() => {
-                    //toast.success('Product added successfully!', { position: "bottom-center", autoClose: 2000, theme: "dark" });
-                    refreshWorkers(); // Refrescar lista de productos
-                    closeModal(); // Cerrar modal
+                    refreshWorkers();
+                    closeModal();
                 })
                 .catch((error) => console.error(error));
         }
@@ -70,7 +67,7 @@ export default function SingleWorker({ worker, closeModal, refreshWorkers }) {
                 </label>
 
                 <label className="entriesForm">
-                    Password: <input type="text" name="password" value={form.password} onChange={handleChange} />
+                    Password: <input type="password" name="password" value={form.password} onChange={handleChange} required />
                 </label>
 
                 <label className="entriesForm">
