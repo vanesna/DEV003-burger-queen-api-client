@@ -26,21 +26,33 @@ export default function Home() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    const httpConfig = { headers: { 'Content-Type': 'application/json' } };
-    axios
-      .post('http://localhost:8080/login', data, httpConfig)
-      .then((response) => {
-        const { accessToken, user } = response.data;        
-        localStorage.setItem('sessionUser', JSON.stringify(user));
-        localStorage.setItem('sessionToken', accessToken);
-        console.log('Welcome!');
+  const httpConfig = { headers: { 'Content-Type': 'application/json' } };
+  axios
+    .post('http://localhost:8080/login', data, httpConfig)
+    .then((response) => {
+      const { accessToken, user } = response.data;        
+      
+      // Guardar el rol en localStorage
+      localStorage.setItem('sessionUser', JSON.stringify(user));
+      localStorage.setItem('sessionToken', accessToken);
+      localStorage.setItem('userRole', user.role); // Asegúrate de que la API devuelva el rol
+      
+      console.log('Welcome!');
+
+      // Redirigir según el rol
+      if (user.role === 'Admin') {
+        navigate('/products');
+      } else if (user.role === 'Chef') {
+        navigate('/kitchen');
+      } else if (user.role === 'Waiter') {
         navigate('/menu');
-      })
-      .catch((error) => {
-        console.error(error.response);
-        setServerError(error.response.data);
-      });
-  };
+      }
+    })
+    .catch((error) => {
+      console.error(error.response);
+      setServerError(error.response.data);
+    });
+};
 
   return (
     <div className="background-image" style={backgroundImageStyle}>
