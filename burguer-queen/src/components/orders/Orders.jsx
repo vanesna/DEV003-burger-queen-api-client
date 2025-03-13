@@ -20,7 +20,7 @@ export default function Orders() {
             });
             setOrders(response.data);
         } catch (error) {
-            console.error("❌ Error obteniendo órdenes:", error);
+            console.error("❌ Error getting orders:", error);
         }
     }, []);
 
@@ -45,7 +45,7 @@ export default function Orders() {
             // Actualizar la lista de órdenes después de cambiar el estado
             getOrders('delivering');  // Recargar la lista de órdenes entregándose
         } catch (error) {
-            console.error("❌ Error actualizando orden:", error);
+            console.error("❌ Error updating orders:", error);
         }
     };
         
