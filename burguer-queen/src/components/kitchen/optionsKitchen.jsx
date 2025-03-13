@@ -2,20 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { Checkbox } from '../checkbox/checkbox';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function OptionsKitchen({ location, singleOrder, status }) {
+export default function OptionsKitchen({ location, singleOrder, status, handleToDelivered }) {
 
 
 
     async function toDelivering(order) {
-
-        toast.success('Order ready', {
-            position: "bottom-center",
-            autoClose: 2000,
-            theme: "dark",
-        })
 
         const token = localStorage.getItem('sessionToken');
 
@@ -27,29 +21,6 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
         order.status = 'delivering';
         order.dateProcessed = formatteddatestr
 
-
-        await axios.put(`http://localhost:8080/orders/${id}`, order, {
-
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-    }
-
-    async function toDelivered(order) {
-
-        toast.success('The order was delivered', {
-            position: "bottom-center",
-            autoClose: 2000,
-            theme: "dark",
-        })
-
-        const token = localStorage.getItem('sessionToken');
-
-        let id = order.id
-
-        order.status = 'delivered';
 
         await axios.put(`http://localhost:8080/orders/${id}`, order, {
 
@@ -90,7 +61,7 @@ export default function OptionsKitchen({ location, singleOrder, status }) {
         return (
             <>
                 <div className='checkbox'>
-                    <Checkbox onChange={() => toDelivered(singleOrder)} />
+                    <Checkbox onChange={() => handleToDelivered(singleOrder)} />
                     <ToastContainer />
                 </div>
             </>

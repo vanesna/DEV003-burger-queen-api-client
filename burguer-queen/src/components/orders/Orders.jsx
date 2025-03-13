@@ -1,76 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../Header/header';
 import NavBarOrders from './NavBar-orders';
 import CardsOrders from '../cardsOrders/cardsOrders';
 import axios from 'axios';
 
 export default function Orders() {
-
-    //const [status, setStatus] = useState('pending');
     const [orders, setOrders] = useState([]);
-    //console.log('orders: ', orders);
+    const [status, setStatus] = useState("delivering");  // Estado para el filtro actual
 
+    // Función para obtener órdenes según el estado seleccionado
+    const getOrders = useCallback(async (status) => {
+        try {
+            const token = localStorage.getItem('sessionToken');
+            const response = await axios.get(`http://localhost:8080/orders?status=${status}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            setOrders(response.data);
+        } catch (error) {
+            console.error("❌ Error obteniendo órdenes:", error);
+        }
+    }, []);
 
-    async function getOrders (status) {
+    // Manejar cambio de estado (filtrado de órdenes)
+    const handleOrderStatus = (newStatus) => {
+        setStatus(newStatus);  // Actualizamos el estado del filtro
+        getOrders(newStatus);  // Cargamos nuevas órdenes
+    };
 
-        const token = localStorage.getItem('sessionToken');
-        //console.log('token: ', token);
+    const handleToDelivered = async (order) => {
+        try {
+            const token = localStorage.getItem('sessionToken');
+            const updatedOrder = { ...order, status: 'delivered' };
+    
+            await axios.put(`http://localhost:8080/orders/${order.id}`, updatedOrder, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            // Actualizar la lista de órdenes después de cambiar el estado
+            getOrders('delivering');  // Recargar la lista de órdenes entregándose
+        } catch (error) {
+            console.error("❌ Error actualizando orden:", error);
+        }
+    };
+        
 
-        await axios.get(`http://localhost:8080/orders?status=${status}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => {
-                //console.log('res: ', res.data);
-                const response = res.data;
-                setOrders(response);
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
-
-    async function handleOrderStatus (e) {
-        e.preventDefault();
-        const status = e.target.value;
-        getOrders(status);
-    }
-
-    async function toDelivered  (order)  {
-
-        const token = localStorage.getItem('sessionToken');
-
-        let id = order.id
-
-        order.status = 'delivered';
-
-
-        await axios.put(`http://localhost:8080/orders/${id}`, order, {
-
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-    }
-
+    // Cargar órdenes al montar el componente
     useEffect(() => {
-        getOrders('delivering')
-    }, [])
-
+        getOrders(status);
+    }, [getOrders, status]);
 
     return (
         <div>
             <Header />
-            {/* <h1>Orders</h1> */}
-            <NavBarOrders 
-            handleOrderStatus={handleOrderStatus} />
-            <CardsOrders 
-            orders={orders}
-            handleToDelivering={toDelivered} />
-
+            <NavBarOrders handleOrderStatus={handleOrderStatus} activeStatus={status} />
+            <CardsOrders orders={orders} handleToDelivered={handleToDelivered} />
         </div>
     );
 }

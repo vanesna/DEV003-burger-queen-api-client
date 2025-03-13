@@ -4,7 +4,7 @@ import './cardsOrders.css'
 import OptionsKitchen from '../kitchen/optionsKitchen';
 import { useLocation } from "react-router-dom";
 
-export default function CardsOrders({ orders }) {
+export default function CardsOrders({ orders, handleToDelivered }) {
 
     const tab = <>&nbsp;&nbsp;&nbsp;&nbsp;</>;
 
@@ -25,12 +25,14 @@ export default function CardsOrders({ orders }) {
                                             <h4 className='productsOrder'>{products.qty}{tab}{products.product.name}</h4>
                                         </div>
                                     )
-                                })}                            
+                                })}
                                 <OptionsKitchen
                                     location={location.pathname}
                                     status={order.status}
                                     singleOrder={order}
+                                    handleToDelivered={handleToDelivered}
                                 />
+
                             </div>
                         )
                     }
