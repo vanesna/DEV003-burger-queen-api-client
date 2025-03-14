@@ -12,9 +12,7 @@ export default function OptionsKitchen({ location, singleOrder, status, handleTo
     async function toDelivering(order) {
 
         const token = localStorage.getItem('sessionToken');
-
         let id = order.id
-
         let d = new Date();
         let formatteddatestr = moment(d).format('hh:mm a');
 
@@ -22,13 +20,18 @@ export default function OptionsKitchen({ location, singleOrder, status, handleTo
         order.dateProcessed = formatteddatestr
 
 
-        await axios.put(`http://localhost:8080/orders/${id}`, order, {
+        try {
+            await axios.put(`http://localhost:8080/orders/${id}`, order, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
 
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
+            handleToDelivered();
+        } catch (error) {
+            console.error("Error updating order:", error);
+        }
     }
 
     if (location === '/kitchen' && status === 'pending') {

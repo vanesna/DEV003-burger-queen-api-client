@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from 'react';
-// import '../navbar/NavBar.css';
-// import './kitchen.css';
+import React, { useState } from 'react';
 import ButtonNavBar from '../button-Navbar/button-Navbar';
 
-
 export default function NavBarKitchen({ handleOrderStatus }) {
-
-
     const [activeButton, setActiveButton] = useState("pending");
 
-    useEffect(() => {
-      
-            handleOrderStatus({ target: { value: "pending" } });
-        }, [handleOrderStatus]);
-
-        const handleButtonClick = (event) => {
-            const value = event.target.value;
-            setActiveButton(value);
-            handleOrderStatus(event);
-        };
+    const handleButtonClick = (event) => {
+        const value = event.target.value;
+        setActiveButton(value);
+        handleOrderStatus(event);
+    };
 
     return (
         <nav className="navbar-kitchen">
