@@ -9,9 +9,9 @@ import Orders from './components/orders/Orders';
 import Products from './components/products/Products';
 
 function PrivateRoute({ element: Component, ...rest }) {
-  const sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
+  //const sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
   const sessionToken = localStorage.getItem('sessionToken');
-  console.log({ sessionToken, sessionUser });
+  //console.log({ sessionToken, sessionUser });
   if (sessionToken) return <Component {...rest} />;
   else return <Navigate to="/login" replace state={{ from: rest.location }} />;
 }
