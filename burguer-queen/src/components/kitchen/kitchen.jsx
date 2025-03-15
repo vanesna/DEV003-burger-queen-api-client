@@ -22,13 +22,11 @@ export default function Kitchen() {
         }
     }
 
-    // Maneja solo los clics en los botones
     function handleOrderStatus(e) {
         const status = e.target.value;
         getOrders(status);
     }
 
-    // Carga inicial de órdenes con estado "pending"
     useEffect(() => {
         getOrders('pending');
     }, []);

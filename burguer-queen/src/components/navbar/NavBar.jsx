@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
-export default function NavBar({ handleMenu, setModalIsOpen, handleCustomerName, clearCustomerName }) {
+export default function NavBar({ handleMenu, setModalIsOpen, handleCustomerName, customer }) {
+  
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState('Breakfast');
-  const [customerName, setCustomerName] = useState('');
+  const [customerName, setCustomerName] = useState(customer || '');
+
+  useEffect(() => {
+    setCustomerName(customer); 
+  }, [customer]);
 
   const handleInputChange = (event) => {
     setCustomerName(event.target.value);
-    handleCustomerName(event); // Llama a la función original
+    handleCustomerName(event); 
   };
 
   return (
@@ -18,7 +23,7 @@ export default function NavBar({ handleMenu, setModalIsOpen, handleCustomerName,
         <input
           type="text"
           placeholder="Customer's name"
-          value={customerName}  // 🟢 Vínculo con el estado
+          value={customerName}  
           onChange={handleInputChange}
         />
       </div>

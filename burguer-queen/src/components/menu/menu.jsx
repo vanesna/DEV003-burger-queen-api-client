@@ -122,7 +122,7 @@ export default function Menu() {
     const order = {
       id,
       userId: user.id,
-      client: customer, // Se usa el nombre del cliente que ya se ingresó
+      client: customer,
       products,
       status: 'pending',
       dataEntry: formatteddatestr,
@@ -138,16 +138,16 @@ export default function Menu() {
       .then((response) => {
         console.log(response);
   
-        // 🟢 Después de confirmar la orden, restablecer todo
-        setModalIsOpen(false); // Cierra el modal
-        setProductsInOrder([]); // Vacía la orden
-        setProductQuantities({}); // Reinicia las cantidades
-        setCustomer(''); // Borra el nombre del cliente
+        setModalIsOpen(false);
+        setProductsInOrder([]);
+        setProductQuantities({});
+        setCustomer(''); 
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  
 
   const getProducts = async () => {
     const token = localStorage.getItem('sessionToken');
@@ -182,6 +182,7 @@ export default function Menu() {
         handleMenu={handleMenu}
         setModalIsOpen={setModalIsOpen}
         handleCustomerName={handleCustomerName}
+        customer={customer}  
       />
       <CardsProd
         products={filteredMenu}

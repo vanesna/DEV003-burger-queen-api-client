@@ -8,7 +8,7 @@ import '../SingleProduct/singleProduct.css';
 export default function SingleWorker({ worker, closeModal, refreshWorkers }) {
     const [form, setForm] = useState({
         email: worker?.email || "",
-        password: "",  // No mostramos la contraseña encriptada
+        password: "",  
         image: worker?.image || "",
         role: worker?.role || "Waiter",
     });
@@ -17,7 +17,7 @@ export default function SingleWorker({ worker, closeModal, refreshWorkers }) {
         if (worker) {
             setForm(prevForm => ({
                 ...prevForm,
-                password: worker.password, // Guardamos la contraseña encriptada
+                password: worker.password, 
             }));
         }
     }, [worker]);
@@ -33,7 +33,6 @@ export default function SingleWorker({ worker, closeModal, refreshWorkers }) {
 
         let updatedWorker = { ...form };
 
-        // Si el usuario no cambia la contraseña, enviamos la original
         if (!form.password) {
             updatedWorker.password = worker?.password;
         }
