@@ -1,20 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
-export default function NavBar({
-  handleMenu,
-  setModalIsOpen,
-  handleCustomerName,
-}) {
-
+export default function NavBar({ handleMenu, setModalIsOpen, handleCustomerName, clearCustomerName }) {
   const navigate = useNavigate();
-  const [activeButton, setActiveButton] = useState("Breakfast"); // Estado para el botón activo
+  const [activeButton, setActiveButton] = useState('Breakfast');
+  const [customerName, setCustomerName] = useState('');
 
-  const handleButtonClick = (event) => {
-    const value = event.target.value;
-    setActiveButton(value); // Actualiza el estado con el botón seleccionado
-    handleMenu(event); // Llama a la función original para manejar el menú
+  const handleInputChange = (event) => {
+    setCustomerName(event.target.value);
+    handleCustomerName(event); // Llama a la función original
   };
 
   return (
@@ -23,21 +18,28 @@ export default function NavBar({
         <input
           type="text"
           placeholder="Customer's name"
-          onChange={handleCustomerName}
+          value={customerName}  // 🟢 Vínculo con el estado
+          onChange={handleInputChange}
         />
       </div>
       <div className="button-group">
         <button
           value="Breakfast"
-          className={`menu-btn ${activeButton === "Breakfast" ? "active" : ""}`}
-          onClick={handleButtonClick}
+          className={`menu-btn ${activeButton === 'Breakfast' ? 'active' : ''}`}
+          onClick={(event) => {
+            setActiveButton(event.target.value);
+            handleMenu(event);
+          }}
         >
           Breakfast
         </button>
         <button
-         value="Lunch"
-         className={`menu-btn ${activeButton === "Lunch" ? "active" : ""}`}
-         onClick={handleButtonClick}
+          value="Lunch"
+          className={`menu-btn ${activeButton === 'Lunch' ? 'active' : ''}`}
+          onClick={(event) => {
+            setActiveButton(event.target.value);
+            handleMenu(event);
+          }}
         >
           Lunch
         </button>

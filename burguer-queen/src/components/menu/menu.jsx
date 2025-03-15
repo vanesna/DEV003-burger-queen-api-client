@@ -105,36 +105,44 @@ export default function Menu() {
 
   const submitOrder = (e) => {
     e.preventDefault();
+  
     let d = new Date();
     let formatteddatestr = moment(d).format('hh:mm a');
     const token = localStorage.getItem('sessionToken');
     const id = new Date().getTime();
     const user = JSON.parse(localStorage.getItem('sessionUser'));
+  
     const productList = productsInOrder.map((product) => product.id);
     const uniqueProducts = [...new Set(productList)];
     const products = uniqueProducts.map((id) => {
       const product = productsInOrder.find((product) => product.id === id);
       return { qty: product.quantity, product };
     });
-
+  
     const order = {
       id,
       userId: user.id,
-      client: customer,
+      client: customer, // Se usa el nombre del cliente que ya se ingresó
       products,
       status: 'pending',
       dataEntry: formatteddatestr,
     };
-    console.log(order);
-
+  
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     };
+  
     axios
       .post('http://localhost:8080/orders', order, { headers })
       .then((response) => {
         console.log(response);
+  
+        // 🟢 Después de confirmar la orden, restablecer todo
+        setModalIsOpen(false); // Cierra el modal
+        setProductsInOrder([]); // Vacía la orden
+        setProductQuantities({}); // Reinicia las cantidades
+        setCustomer(''); // Borra el nombre del cliente
       })
       .catch((error) => {
         console.log(error);
