@@ -1,0 +1,12 @@
+.orderChecked, .checkbox {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.1rem;
+    padding-right: 1rem;
+    color: #711E62;
+    font-weight: bold;
+}
+
+input[type=checkbox] {
+    transform: scale(1.6);
+}
