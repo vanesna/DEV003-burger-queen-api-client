@@ -15,7 +15,7 @@ export default function CardAllWorker({ setModalIsOpen, workers, getWorkers }) {
   const handleDeleteUser = async (UserId) => {
     const token = localStorage.getItem('sessionToken');
     try {
-      await axios.delete(`http://localhost:8080/users/${UserId}`, {
+      await axios.delete(`https://burger-queen-mock-zjbl.onrender.com/users/${UserId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

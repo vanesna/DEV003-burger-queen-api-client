@@ -17,7 +17,7 @@ export default function Products() {
     const getAllProducts = async () => {
         const token = localStorage.getItem('sessionToken');
         try {
-            const res = await axios.get('http://localhost:8080/products', {
+            const res = await axios.get('https://burger-queen-mock-zjbl.onrender.com/products', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',

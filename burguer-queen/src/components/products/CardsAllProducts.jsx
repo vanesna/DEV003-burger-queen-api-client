@@ -16,7 +16,7 @@ export default function CardsAllProducts({ setModalIsOpen, allProducts, getAllPr
     const handleDeleteProduct = async (productId) => {
         const token = localStorage.getItem('sessionToken');
         try {
-            await axios.delete(`http://localhost:8080/products/${productId}`, {
+            await axios.delete(`https://burger-queen-mock-zjbl.onrender.com/products/${productId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',

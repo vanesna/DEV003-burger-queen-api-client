@@ -19,10 +19,10 @@ export default function Users() {
       Authorization: `Bearer ${token}`,
     };
     axios
-      .get('http://localhost:8080/users', { headers })
+      .get('https://burger-queen-mock-zjbl.onrender.com/users', { headers })
       .then((res) => {
         const response = res.data;
-        console.log(response);
+        //console.log(response);
         setWorkers(response);
       })
       .catch((error) => {

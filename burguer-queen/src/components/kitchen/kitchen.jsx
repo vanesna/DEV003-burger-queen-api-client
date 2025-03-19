@@ -10,7 +10,7 @@ export default function Kitchen() {
     async function getOrders(status) {
         const token = localStorage.getItem('sessionToken');
         try {
-            const res = await axios.get(`http://localhost:8080/orders?status=${status}`, {
+            const res = await axios.get(`https://burger-queen-mock-zjbl.onrender.com/orders?status=${status}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',

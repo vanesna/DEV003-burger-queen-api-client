@@ -21,7 +21,7 @@ export default function OptionsKitchen({ location, singleOrder, status, handleTo
 
 
         try {
-            await axios.put(`http://localhost:8080/orders/${id}`, order, {
+            await axios.put(`https://burger-queen-mock-zjbl.onrender.com/orders/${id}`, order, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
