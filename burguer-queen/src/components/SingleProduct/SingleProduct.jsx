@@ -40,7 +40,7 @@ export default function SingleProduct({ product, closeModal, refreshProducts }) 
         // Si hay un producto, es edición (PUT)
         if (product) {
             axios
-                .put(`http://localhost:8080/products/${product.id}`, form, { headers })
+                .put(`https://burger-queen-mock-zjbl.onrender.com/products/${product.id}`, form, { headers })
                 .then(() => {
                     //toast.success('Product updated successfully!', { position: "bottom-center", autoClose: 2000, theme: "dark" });
                     refreshProducts(); // Refrescar lista de productos
@@ -51,7 +51,7 @@ export default function SingleProduct({ product, closeModal, refreshProducts }) 
             // Si no hay un producto, es nuevo (POST)
             const newProduct = { ...form, dateEntry: moment().format('LLL') };
             axios
-                .post('http://localhost:8080/products', newProduct, { headers })
+                .post('https://burger-queen-mock-zjbl.onrender.com/products', newProduct, { headers })
                 .then(() => {
                     //toast.success('Product added successfully!', { position: "bottom-center", autoClose: 2000, theme: "dark" });
                     refreshProducts(); // Refrescar lista de productos

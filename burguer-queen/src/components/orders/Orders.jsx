@@ -12,7 +12,7 @@ export default function Orders() {
     const getOrders = useCallback(async (status) => {
         try {
             const token = localStorage.getItem('sessionToken');
-            const response = await axios.get(`http://localhost:8080/orders?status=${status}`, {
+            const response = await axios.get(`https://burger-queen-mock-zjbl.onrender.com/orders?status=${status}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export default function Orders() {
             const token = localStorage.getItem('sessionToken');
             const updatedOrder = { ...order, status: 'delivered' };
     
-            await axios.put(`http://localhost:8080/orders/${order.id}`, updatedOrder, {
+            await axios.put(`https://burger-queen-mock-zjbl.onrender.com/orders/${order.id}`, updatedOrder, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',

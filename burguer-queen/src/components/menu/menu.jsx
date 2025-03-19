@@ -134,9 +134,9 @@ export default function Menu() {
     };
   
     axios
-      .post('http://localhost:8080/orders', order, { headers })
+      .post('https://burger-queen-mock-zjbl.onrender.com/orders', order, { headers })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
   
         setModalIsOpen(false);
         setProductsInOrder([]);
@@ -152,7 +152,7 @@ export default function Menu() {
   const getProducts = async () => {
     const token = localStorage.getItem('sessionToken');
     await axios
-      .get('http://localhost:8080/products', {
+      .get('https://burger-queen-mock-zjbl.onrender.com/products', {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

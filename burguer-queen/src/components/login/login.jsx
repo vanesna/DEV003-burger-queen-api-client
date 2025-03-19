@@ -28,7 +28,7 @@ export default function Home() {
   const onSubmit = (data) => {
   const httpConfig = { headers: { 'Content-Type': 'application/json' } };
   axios
-    .post('http://localhost:8080/login', data, httpConfig)
+    .post('https://burger-queen-mock-zjbl.onrender.com/login', data, httpConfig)
     .then((response) => {
       const { accessToken, user } = response.data;        
       

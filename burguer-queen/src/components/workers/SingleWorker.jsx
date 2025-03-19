@@ -39,7 +39,7 @@ export default function SingleWorker({ worker, closeModal, refreshWorkers }) {
 
         if (worker) {
             axios
-                .put(`http://localhost:8080/users/${worker.id}`, updatedWorker, { headers })
+                .put(`https://burger-queen-mock-zjbl.onrender.com/users/${worker.id}`, updatedWorker, { headers })
                 .then(() => {
                     refreshWorkers();
                     closeModal();
@@ -48,7 +48,7 @@ export default function SingleWorker({ worker, closeModal, refreshWorkers }) {
         } else {
             updatedWorker.dateEntry = moment().format('LLL');
             axios
-                .post('http://localhost:8080/users', updatedWorker, { headers })
+                .post('https://burger-queen-mock-zjbl.onrender.com/users', updatedWorker, { headers })
                 .then(() => {
                     refreshWorkers();
                     closeModal();
